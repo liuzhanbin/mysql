@@ -1,0 +1,597 @@
+2016-08-20 06:53:53,813 p=9615 u=root |  172.16.52.169 | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
+2016-08-20 06:54:42,544 p=9650 u=root |  172.16.52.169 | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
+2016-08-20 06:56:49,377 p=9676 u=root |  PLAY [execute shell] ***********************************************************
+2016-08-20 06:56:49,420 p=9676 u=root |  TASK [setup] *******************************************************************
+2016-08-20 06:56:56,638 p=9676 u=root |  ok: [172.16.52.169]
+2016-08-20 06:56:56,646 p=9676 u=root |  TASK [check: 检查mysql目录是否已经存在 存在则退出] ********************************************
+2016-08-20 06:56:59,804 p=9676 u=root |  fatal: [172.16.52.169]: FAILED! => {"changed": true, "cmd": "[ ! -e /usr/local/mysql/multi/3308 ] && echo \"OK\"", "delta": "0:00:00.004096", "end": "2016-08-20 08:00:13.684592", "failed": true, "failed_when_result": true, "rc": 1, "start": "2016-08-20 08:00:13.680496", "stderr": "", "stdout": "", "stdout_lines": [], "warnings": []}
+2016-08-20 06:56:59,811 p=9676 u=root |  NO MORE HOSTS LEFT *************************************************************
+2016-08-20 06:56:59,813 p=9676 u=root |   [WARNING]: Could not create retry file '2.install_mysql.retry'.         [Errno 2] No such file or directory: ''
+
+2016-08-20 06:56:59,814 p=9676 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 06:56:59,814 p=9676 u=root |  172.16.52.169              : ok=1    changed=0    unreachable=0    failed=1   
+2016-08-20 06:57:59,584 p=9699 u=root |  PLAY [execute shell] ***********************************************************
+2016-08-20 06:57:59,631 p=9699 u=root |  TASK [setup] *******************************************************************
+2016-08-20 06:58:04,695 p=9699 u=root |  ok: [172.16.52.169]
+2016-08-20 06:58:04,705 p=9699 u=root |  TASK [check: 检查mysql目录是否已经存在 存在则退出] ********************************************
+2016-08-20 06:58:07,636 p=9699 u=root |  changed: [172.16.52.169]
+2016-08-20 06:58:07,645 p=9699 u=root |  TASK [mkdir] *******************************************************************
+2016-08-20 06:58:10,590 p=9699 u=root |  changed: [172.16.52.169]
+2016-08-20 06:58:10,592 p=9699 u=root |   [WARNING]: Consider using file module with state=directory rather than running mkdir
+
+2016-08-20 06:58:10,599 p=9699 u=root |  TASK [chown] *******************************************************************
+2016-08-20 06:58:13,404 p=9699 u=root |  changed: [172.16.52.169]
+2016-08-20 06:58:13,405 p=9699 u=root |   [WARNING]: Consider using file module with owner rather than running chown
+
+2016-08-20 06:58:13,412 p=9699 u=root |  TASK [config mysql conf file] **************************************************
+2016-08-20 06:58:16,540 p=9699 u=root |  changed: [172.16.52.169]
+2016-08-20 06:58:16,541 p=9699 u=root |   [WARNING]: Consider using template or lineinfile module rather than running sed
+
+2016-08-20 06:58:16,550 p=9699 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 06:58:16,550 p=9699 u=root |  172.16.52.169              : ok=5    changed=4    unreachable=0    failed=0   
+2016-08-20 07:21:47,059 p=9829 u=root |  ERROR! Syntax Error while loading YAML.
+
+
+The error appears to have been in '/root/jetbin_project/copy.yuml': line 2, column 1, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+- hosts:mysql
+	tasks:
+^ here
+
+2016-08-20 07:22:10,659 p=9837 u=root |  ERROR! Syntax Error while loading YAML.
+
+
+The error appears to have been in '/root/jetbin_project/copy.yuml': line 2, column 1, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+- hosts: mysql
+	tasks:
+^ here
+
+2016-08-20 07:22:39,356 p=9843 u=root |  ERROR! Syntax Error while loading YAML.
+
+
+The error appears to have been in '/root/jetbin_project/copy.yuml': line 2, column 10, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+- hosts: mysql
+    tasks:
+         ^ here
+
+2016-08-20 07:22:52,401 p=9849 u=root |  ERROR! Syntax Error while loading YAML.
+
+
+The error appears to have been in '/root/jetbin_project/copy.yuml': line 2, column 10, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+- hosts: mysql
+    tasks:
+         ^ here
+
+2016-08-20 07:23:11,432 p=9857 u=root |  ERROR! Syntax Error while loading YAML.
+
+
+The error appears to have been in '/root/jetbin_project/copy.yuml': line 2, column 11, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+- hosts: mysql
+     tasks:
+          ^ here
+
+2016-08-20 07:24:54,719 p=9868 u=root |  ERROR! Syntax Error while loading YAML.
+
+
+The error appears to have been in '/root/jetbin_project/copy.yuml': line 5, column 1, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+      template: src=./test.conf dest={{ mysql_path }}/{{ mysql_port }}/conf owner=mysql group=mysql mode=0644
+
+^ here
+
+2016-08-20 07:25:54,326 p=9876 u=root |  playbook: copy.yuml
+2016-08-20 07:26:04,225 p=9881 u=root |  PLAY [execute shell] ***********************************************************
+2016-08-20 07:26:04,270 p=9881 u=root |  TASK [setup] *******************************************************************
+2016-08-20 07:26:08,302 p=9881 u=root |  ok: [172.16.52.169]
+2016-08-20 07:26:08,310 p=9881 u=root |  TASK [check: 检查mysql目录是否已经存在 存在则退出] ********************************************
+2016-08-20 07:26:11,579 p=9881 u=root |  changed: [172.16.52.169]
+2016-08-20 07:26:11,587 p=9881 u=root |  TASK [mkdir] *******************************************************************
+2016-08-20 07:26:14,572 p=9881 u=root |  changed: [172.16.52.169]
+2016-08-20 07:26:14,574 p=9881 u=root |   [WARNING]: Consider using file module with state=directory rather than running mkdir
+
+2016-08-20 07:26:14,582 p=9881 u=root |  TASK [chown] *******************************************************************
+2016-08-20 07:26:17,419 p=9881 u=root |  changed: [172.16.52.169]
+2016-08-20 07:26:17,419 p=9881 u=root |   [WARNING]: Consider using file module with owner rather than running chown
+
+2016-08-20 07:26:17,427 p=9881 u=root |  TASK [config mysql conf file] **************************************************
+2016-08-20 07:26:20,417 p=9881 u=root |  changed: [172.16.52.169]
+2016-08-20 07:26:20,418 p=9881 u=root |   [WARNING]: Consider using template or lineinfile module rather than running sed
+
+2016-08-20 07:26:20,425 p=9881 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 07:26:20,425 p=9881 u=root |  172.16.52.169              : ok=5    changed=4    unreachable=0    failed=0   
+2016-08-20 07:26:27,585 p=9912 u=root |  PLAY [mysql] *******************************************************************
+2016-08-20 07:26:27,636 p=9912 u=root |  TASK [setup] *******************************************************************
+2016-08-20 07:26:31,325 p=9912 u=root |  ok: [172.16.52.169]
+2016-08-20 07:26:31,335 p=9912 u=root |  TASK [copy config file] ********************************************************
+2016-08-20 07:26:31,433 p=9912 u=root |  fatal: [172.16.52.169]: FAILED! => {"changed": false, "failed": true, "msg": "IOError: [Errno 2] No such file or directory: u'/root/jetbin_project/test.conf'"}
+2016-08-20 07:26:31,439 p=9912 u=root |  NO MORE HOSTS LEFT *************************************************************
+2016-08-20 07:26:31,442 p=9912 u=root |   [WARNING]: Could not create retry file 'copy.retry'.         [Errno 2] No such file or directory: ''
+
+2016-08-20 07:26:31,442 p=9912 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 07:26:31,443 p=9912 u=root |  172.16.52.169              : ok=1    changed=0    unreachable=0    failed=1   
+2016-08-20 07:26:59,862 p=9934 u=root |  PLAY [mysql] *******************************************************************
+2016-08-20 07:26:59,906 p=9934 u=root |  TASK [setup] *******************************************************************
+2016-08-20 07:27:04,294 p=9934 u=root |  ok: [172.16.52.169]
+2016-08-20 07:27:04,304 p=9934 u=root |  TASK [copy config file] ********************************************************
+2016-08-20 07:27:08,072 p=9934 u=root |  changed: [172.16.52.169]
+2016-08-20 07:27:08,080 p=9934 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 07:27:08,080 p=9934 u=root |  172.16.52.169              : ok=2    changed=1    unreachable=0    failed=0   
+2016-08-20 07:29:46,335 p=9962 u=root |  PLAY [execute shell] ***********************************************************
+2016-08-20 07:29:46,375 p=9962 u=root |  TASK [setup] *******************************************************************
+2016-08-20 07:29:49,836 p=9962 u=root |  ok: [172.16.52.169]
+2016-08-20 07:29:49,843 p=9962 u=root |  TASK [check: 检查mysql目录是否已经存在 存在则退出] ********************************************
+2016-08-20 07:29:52,602 p=9962 u=root |  fatal: [172.16.52.169]: FAILED! => {"changed": true, "cmd": "[ ! -e /usr/local/mysql/multi/$1 ] && echo \"OK\"", "delta": "0:00:00.002944", "end": "2016-08-20 08:33:07.529441", "failed": true, "failed_when_result": true, "rc": 1, "start": "2016-08-20 08:33:07.526497", "stderr": "", "stdout": "", "stdout_lines": [], "warnings": []}
+2016-08-20 07:29:52,608 p=9962 u=root |  NO MORE HOSTS LEFT *************************************************************
+2016-08-20 07:29:52,610 p=9962 u=root |   [WARNING]: Could not create retry file '2.install_mysql.retry'.         [Errno 2] No such file or directory: ''
+
+2016-08-20 07:29:52,611 p=9962 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 07:29:52,611 p=9962 u=root |  172.16.52.169              : ok=1    changed=0    unreachable=0    failed=1   
+2016-08-20 07:30:09,089 p=9985 u=root |  PLAY [execute shell] ***********************************************************
+2016-08-20 07:30:09,129 p=9985 u=root |  TASK [setup] *******************************************************************
+2016-08-20 07:30:12,582 p=9985 u=root |  ok: [172.16.52.169]
+2016-08-20 07:30:12,591 p=9985 u=root |  TASK [check: 检查mysql目录是否已经存在 存在则退出] ********************************************
+2016-08-20 07:30:15,429 p=9985 u=root |  changed: [172.16.52.169]
+2016-08-20 07:30:15,437 p=9985 u=root |  TASK [mkdir] *******************************************************************
+2016-08-20 07:30:18,563 p=9985 u=root |  changed: [172.16.52.169]
+2016-08-20 07:30:18,565 p=9985 u=root |   [WARNING]: Consider using file module with state=directory rather than running mkdir
+
+2016-08-20 07:30:18,573 p=9985 u=root |  TASK [chown] *******************************************************************
+2016-08-20 07:30:21,465 p=9985 u=root |  changed: [172.16.52.169]
+2016-08-20 07:30:21,466 p=9985 u=root |   [WARNING]: Consider using file module with owner rather than running chown
+
+2016-08-20 07:30:21,475 p=9985 u=root |  TASK [copy config file] ********************************************************
+2016-08-20 07:30:25,144 p=9985 u=root |  changed: [172.16.52.169]
+2016-08-20 07:30:25,152 p=9985 u=root |  TASK [config mysql conf file] **************************************************
+2016-08-20 07:30:28,108 p=9985 u=root |  changed: [172.16.52.169]
+2016-08-20 07:30:28,109 p=9985 u=root |   [WARNING]: Consider using template or lineinfile module rather than running sed
+
+2016-08-20 07:30:28,118 p=9985 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 07:30:28,118 p=9985 u=root |  172.16.52.169              : ok=6    changed=5    unreachable=0    failed=0   
+2016-08-20 09:27:50,225 p=10397 u=root |  PLAY [execute shell] ***********************************************************
+2016-08-20 09:27:50,269 p=10397 u=root |  TASK [setup] *******************************************************************
+2016-08-20 09:27:54,355 p=10397 u=root |  ok: [172.16.52.169]
+2016-08-20 09:27:54,367 p=10397 u=root |  TASK [check: 检查mysql目录是否已经存在 存在则退出] ********************************************
+2016-08-20 09:27:57,721 p=10397 u=root |  changed: [172.16.52.169]
+2016-08-20 09:27:57,729 p=10397 u=root |  TASK [mkdir] *******************************************************************
+2016-08-20 09:28:00,699 p=10397 u=root |  changed: [172.16.52.169]
+2016-08-20 09:28:00,701 p=10397 u=root |   [WARNING]: Consider using file module with state=directory rather than running mkdir
+
+2016-08-20 09:28:00,708 p=10397 u=root |  TASK [chown] *******************************************************************
+2016-08-20 09:28:03,835 p=10397 u=root |  changed: [172.16.52.169]
+2016-08-20 09:28:03,837 p=10397 u=root |   [WARNING]: Consider using file module with owner rather than running chown
+
+2016-08-20 09:28:03,845 p=10397 u=root |  TASK [copy config file] ********************************************************
+2016-08-20 09:28:07,549 p=10397 u=root |  changed: [172.16.52.169]
+2016-08-20 09:28:07,557 p=10397 u=root |  TASK [sed mysql port] **********************************************************
+2016-08-20 09:28:10,560 p=10397 u=root |  fatal: [172.16.52.169]: FAILED! => {"changed": true, "cmd": "sed -i 's/mysql_port/3312/g' /usr/local/mysql/multi/3312/conf/test.cnf", "delta": "0:00:00.004942", "end": "2016-08-20 10:31:29.256669", "failed": true, "rc": 2, "start": "2016-08-20 10:31:29.251727", "stderr": "sed：无法读取 /usr/local/mysql/multi/3312/conf/test.cnf：没有那个文件或目录", "stdout": "", "stdout_lines": [], "warnings": ["Consider using template or lineinfile module rather than running sed"]}
+2016-08-20 09:28:10,566 p=10397 u=root |  NO MORE HOSTS LEFT *************************************************************
+2016-08-20 09:28:10,569 p=10397 u=root |   [WARNING]: Could not create retry file '2.install_mysql.retry'.         [Errno 2] No such file or directory: ''
+
+2016-08-20 09:28:10,570 p=10397 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 09:28:10,570 p=10397 u=root |  172.16.52.169              : ok=5    changed=4    unreachable=0    failed=1   
+2016-08-20 09:29:37,367 p=10437 u=root |  PLAY [execute shell] ***********************************************************
+2016-08-20 09:29:37,410 p=10437 u=root |  TASK [setup] *******************************************************************
+2016-08-20 09:29:41,935 p=10437 u=root |  ok: [172.16.52.169]
+2016-08-20 09:29:41,944 p=10437 u=root |  TASK [check: 检查mysql目录是否已经存在 存在则退出] ********************************************
+2016-08-20 09:29:45,281 p=10437 u=root |  changed: [172.16.52.169]
+2016-08-20 09:29:45,289 p=10437 u=root |  TASK [mkdir] *******************************************************************
+2016-08-20 09:29:48,237 p=10437 u=root |  changed: [172.16.52.169]
+2016-08-20 09:29:48,238 p=10437 u=root |   [WARNING]: Consider using file module with state=directory rather than running mkdir
+
+2016-08-20 09:29:48,245 p=10437 u=root |  TASK [chown] *******************************************************************
+2016-08-20 09:29:51,284 p=10437 u=root |  changed: [172.16.52.169]
+2016-08-20 09:29:51,284 p=10437 u=root |   [WARNING]: Consider using file module with owner rather than running chown
+
+2016-08-20 09:29:51,293 p=10437 u=root |  TASK [copy config file] ********************************************************
+2016-08-20 09:29:55,021 p=10437 u=root |  changed: [172.16.52.169]
+2016-08-20 09:29:55,029 p=10437 u=root |  TASK [sed mysql port] **********************************************************
+2016-08-20 09:29:58,433 p=10437 u=root |  changed: [172.16.52.169]
+2016-08-20 09:29:58,433 p=10437 u=root |   [WARNING]: Consider using template or lineinfile module rather than running sed
+
+2016-08-20 09:29:58,441 p=10437 u=root |  TASK [sed mysql path] **********************************************************
+2016-08-20 09:30:01,485 p=10437 u=root |  changed: [172.16.52.169]
+2016-08-20 09:30:01,494 p=10437 u=root |  TASK [sed mysql BP] ************************************************************
+2016-08-20 09:30:04,389 p=10437 u=root |  changed: [172.16.52.169]
+2016-08-20 09:30:04,398 p=10437 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 09:30:04,399 p=10437 u=root |  172.16.52.169              : ok=8    changed=7    unreachable=0    failed=0   
+2016-08-20 09:37:39,264 p=10509 u=root |  PLAY [execute shell] ***********************************************************
+2016-08-20 09:37:39,311 p=10509 u=root |  TASK [setup] *******************************************************************
+2016-08-20 09:37:43,191 p=10509 u=root |  ok: [172.16.52.169]
+2016-08-20 09:37:43,200 p=10509 u=root |  TASK [check: 检查mysql目录是否已经存在 存在则退出] ********************************************
+2016-08-20 09:37:46,588 p=10509 u=root |  changed: [172.16.52.169]
+2016-08-20 09:37:46,597 p=10509 u=root |  TASK [mkdir] *******************************************************************
+2016-08-20 09:37:49,544 p=10509 u=root |  changed: [172.16.52.169]
+2016-08-20 09:37:49,546 p=10509 u=root |   [WARNING]: Consider using file module with state=directory rather than running mkdir
+
+2016-08-20 09:37:49,554 p=10509 u=root |  TASK [chown] *******************************************************************
+2016-08-20 09:37:52,381 p=10509 u=root |  changed: [172.16.52.169]
+2016-08-20 09:37:52,382 p=10509 u=root |   [WARNING]: Consider using file module with owner rather than running chown
+
+2016-08-20 09:37:52,390 p=10509 u=root |  TASK [copy config file] ********************************************************
+2016-08-20 09:37:56,257 p=10509 u=root |  changed: [172.16.52.169]
+2016-08-20 09:37:56,265 p=10509 u=root |  TASK [sed mysql port] **********************************************************
+2016-08-20 09:37:59,779 p=10509 u=root |  changed: [172.16.52.169]
+2016-08-20 09:37:59,779 p=10509 u=root |   [WARNING]: Consider using template or lineinfile module rather than running sed
+
+2016-08-20 09:37:59,787 p=10509 u=root |  TASK [sed mysql path] **********************************************************
+2016-08-20 09:38:03,440 p=10509 u=root |  fatal: [172.16.52.169]: FAILED! => {"changed": true, "cmd": "sed -i 's/mysql_path//usr/local/mysql/multi/g' /usr/local/mysql/multi/3312/conf/my.cnf", "delta": "0:00:00.003071", "end": "2016-08-20 10:41:22.451313", "failed": true, "rc": 1, "start": "2016-08-20 10:41:22.448242", "stderr": "sed：-e 表达式 #1，字符 15：“s”的未知选项", "stdout": "", "stdout_lines": [], "warnings": ["Consider using template or lineinfile module rather than running sed"]}
+2016-08-20 09:38:03,446 p=10509 u=root |  NO MORE HOSTS LEFT *************************************************************
+2016-08-20 09:38:03,448 p=10509 u=root |   [WARNING]: Could not create retry file '2.install_mysql.retry'.         [Errno 2] No such file or directory: ''
+
+2016-08-20 09:38:03,448 p=10509 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 09:38:03,448 p=10509 u=root |  172.16.52.169              : ok=6    changed=5    unreachable=0    failed=1   
+2016-08-20 09:40:02,085 p=10558 u=root |  PLAY [execute shell] ***********************************************************
+2016-08-20 09:40:02,126 p=10558 u=root |  TASK [setup] *******************************************************************
+2016-08-20 09:40:06,641 p=10558 u=root |  ok: [172.16.52.169]
+2016-08-20 09:40:06,651 p=10558 u=root |  TASK [check: 检查mysql目录是否已经存在 存在则退出] ********************************************
+2016-08-20 09:40:09,769 p=10558 u=root |  changed: [172.16.52.169]
+2016-08-20 09:40:09,778 p=10558 u=root |  TASK [mkdir] *******************************************************************
+2016-08-20 09:40:12,664 p=10558 u=root |  changed: [172.16.52.169]
+2016-08-20 09:40:12,665 p=10558 u=root |   [WARNING]: Consider using file module with state=directory rather than running mkdir
+
+2016-08-20 09:40:12,673 p=10558 u=root |  TASK [chown] *******************************************************************
+2016-08-20 09:40:15,510 p=10558 u=root |  changed: [172.16.52.169]
+2016-08-20 09:40:15,511 p=10558 u=root |   [WARNING]: Consider using file module with owner rather than running chown
+
+2016-08-20 09:40:15,521 p=10558 u=root |  TASK [copy config file] ********************************************************
+2016-08-20 09:40:19,013 p=10558 u=root |  changed: [172.16.52.169]
+2016-08-20 09:40:19,021 p=10558 u=root |  TASK [sed mysql port] **********************************************************
+2016-08-20 09:40:22,194 p=10558 u=root |  changed: [172.16.52.169]
+2016-08-20 09:40:22,195 p=10558 u=root |   [WARNING]: Consider using template or lineinfile module rather than running sed
+
+2016-08-20 09:40:22,203 p=10558 u=root |  TASK [sed mysql path] **********************************************************
+2016-08-20 09:40:25,339 p=10558 u=root |  changed: [172.16.52.169]
+2016-08-20 09:40:25,348 p=10558 u=root |  TASK [sed mysql BP] ************************************************************
+2016-08-20 09:40:28,123 p=10558 u=root |  changed: [172.16.52.169]
+2016-08-20 09:40:28,132 p=10558 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 09:40:28,132 p=10558 u=root |  172.16.52.169              : ok=8    changed=7    unreachable=0    failed=0   
+2016-08-20 09:47:20,199 p=10616 u=root |  PLAY [execute shell] ***********************************************************
+2016-08-20 09:47:20,249 p=10616 u=root |  TASK [setup] *******************************************************************
+2016-08-20 09:47:23,885 p=10616 u=root |  ok: [172.16.52.169]
+2016-08-20 09:47:23,893 p=10616 u=root |  TASK [check: 检查mysql目录是否已经存在 存在则退出] ********************************************
+2016-08-20 09:47:26,782 p=10616 u=root |  changed: [172.16.52.169]
+2016-08-20 09:47:26,789 p=10616 u=root |  TASK [mkdir] *******************************************************************
+2016-08-20 09:47:29,539 p=10616 u=root |  changed: [172.16.52.169]
+2016-08-20 09:47:29,541 p=10616 u=root |   [WARNING]: Consider using file module with state=directory rather than running mkdir
+
+2016-08-20 09:47:29,551 p=10616 u=root |  TASK [chown] *******************************************************************
+2016-08-20 09:47:32,301 p=10616 u=root |  changed: [172.16.52.169]
+2016-08-20 09:47:32,301 p=10616 u=root |   [WARNING]: Consider using file module with owner rather than running chown
+
+2016-08-20 09:47:32,310 p=10616 u=root |  TASK [copy config file] ********************************************************
+2016-08-20 09:47:35,638 p=10616 u=root |  changed: [172.16.52.169]
+2016-08-20 09:47:35,646 p=10616 u=root |  TASK [sed mysql port] **********************************************************
+2016-08-20 09:47:38,386 p=10616 u=root |  changed: [172.16.52.169]
+2016-08-20 09:47:38,387 p=10616 u=root |   [WARNING]: Consider using template or lineinfile module rather than running sed
+
+2016-08-20 09:47:38,394 p=10616 u=root |  TASK [sed mysql path] **********************************************************
+2016-08-20 09:47:41,251 p=10616 u=root |  changed: [172.16.52.169]
+2016-08-20 09:47:41,260 p=10616 u=root |  TASK [sed mysql BP] ************************************************************
+2016-08-20 09:47:44,037 p=10616 u=root |  changed: [172.16.52.169]
+2016-08-20 09:47:44,047 p=10616 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 09:47:44,047 p=10616 u=root |  172.16.52.169              : ok=8    changed=7    unreachable=0    failed=0   
+2016-08-20 12:38:47,282 p=17964 u=root |  ERROR! Syntax Error while loading YAML.
+
+
+The error appears to have been in '/root/jetbin_project/3.shell.yuml': line 4, column 4, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+  tasks:
+   	- name: 'check1: 检查mysql目录是否已经存在 存在则退出'
+   ^ here
+This one looks easy to fix.  It seems that there is a value started
+with a quote, and the YAML parser is expecting to see the line ended
+with the same kind of quote.  For instance:
+
+    when: "ok" in result.stdout
+
+Could be written as:
+
+   when: '"ok" in result.stdout'
+
+Or equivalently:
+
+   when: "'ok' in result.stdout"
+
+2016-08-20 12:39:11,076 p=17970 u=root |  playbook: 3.shell.yuml
+2016-08-20 14:50:14,805 p=18490 u=root |  playbook: 3.shell.yuml
+2016-08-20 14:50:38,703 p=18497 u=root |  PLAY [pxc集群部署的先决条件检查] **********************************************************
+2016-08-20 14:50:38,876 p=18497 u=root |  TASK [setup] *******************************************************************
+2016-08-20 14:50:47,183 p=18497 u=root |  ok: [172.16.52.169]
+2016-08-20 14:50:47,198 p=18497 u=root |  TASK [初始化启动数据库] ****************************************************************
+2016-08-20 14:50:49,611 p=18497 u=root |  ok: [172.16.52.169]
+2016-08-20 14:50:49,619 p=18497 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 14:50:49,620 p=18497 u=root |  172.16.52.169              : ok=2    changed=0    unreachable=0    failed=0   
+2016-08-20 15:16:16,935 p=18634 u=root |  PLAY [execute shell] ***********************************************************
+2016-08-20 15:16:16,989 p=18634 u=root |  TASK [setup] *******************************************************************
+2016-08-20 15:16:21,134 p=18634 u=root |  ok: [172.16.52.169]
+2016-08-20 15:16:21,142 p=18634 u=root |  TASK [check: 检查mysql目录是否已经存在 存在则退出] ********************************************
+2016-08-20 15:16:24,323 p=18634 u=root |  changed: [172.16.52.169]
+2016-08-20 15:16:24,331 p=18634 u=root |  TASK [mkdir] *******************************************************************
+2016-08-20 15:16:27,288 p=18634 u=root |  changed: [172.16.52.169]
+2016-08-20 15:16:27,290 p=18634 u=root |   [WARNING]: Consider using file module with state=directory rather than running mkdir
+
+2016-08-20 15:16:27,298 p=18634 u=root |  TASK [chown] *******************************************************************
+2016-08-20 15:16:30,038 p=18634 u=root |  changed: [172.16.52.169]
+2016-08-20 15:16:30,038 p=18634 u=root |   [WARNING]: Consider using file module with owner rather than running chown
+
+2016-08-20 15:16:30,049 p=18634 u=root |  TASK [copy config file] ********************************************************
+2016-08-20 15:16:33,338 p=18634 u=root |  changed: [172.16.52.169]
+2016-08-20 15:16:33,347 p=18634 u=root |  TASK [sed mysql port] **********************************************************
+2016-08-20 15:16:36,163 p=18634 u=root |  changed: [172.16.52.169]
+2016-08-20 15:16:36,163 p=18634 u=root |   [WARNING]: Consider using template or lineinfile module rather than running sed
+
+2016-08-20 15:16:36,172 p=18634 u=root |  TASK [sed mysql path] **********************************************************
+2016-08-20 15:16:39,002 p=18634 u=root |  changed: [172.16.52.169]
+2016-08-20 15:16:39,010 p=18634 u=root |  TASK [sed mysql BP] ************************************************************
+2016-08-20 15:16:41,804 p=18634 u=root |  changed: [172.16.52.169]
+2016-08-20 15:16:41,814 p=18634 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 15:16:41,814 p=18634 u=root |  172.16.52.169              : ok=8    changed=7    unreachable=0    failed=0   
+2016-08-20 15:16:53,223 p=18681 u=root |  PLAY [execute shell] ***********************************************************
+2016-08-20 15:16:53,272 p=18681 u=root |  TASK [setup] *******************************************************************
+2016-08-20 15:16:57,281 p=18681 u=root |  ok: [172.16.52.169]
+2016-08-20 15:16:57,290 p=18681 u=root |  TASK [check: 检查mysql目录是否已经存在 存在则退出] ********************************************
+2016-08-20 15:17:00,382 p=18681 u=root |  changed: [172.16.52.169]
+2016-08-20 15:17:00,391 p=18681 u=root |  TASK [mkdir] *******************************************************************
+2016-08-20 15:17:03,469 p=18681 u=root |  changed: [172.16.52.169]
+2016-08-20 15:17:03,471 p=18681 u=root |   [WARNING]: Consider using file module with state=directory rather than running mkdir
+
+2016-08-20 15:17:03,478 p=18681 u=root |  TASK [chown] *******************************************************************
+2016-08-20 15:17:06,612 p=18681 u=root |  changed: [172.16.52.169]
+2016-08-20 15:17:06,613 p=18681 u=root |   [WARNING]: Consider using file module with owner rather than running chown
+
+2016-08-20 15:17:06,622 p=18681 u=root |  TASK [copy config file] ********************************************************
+2016-08-20 15:17:10,091 p=18681 u=root |  changed: [172.16.52.169]
+2016-08-20 15:17:10,099 p=18681 u=root |  TASK [sed mysql port] **********************************************************
+2016-08-20 15:17:13,093 p=18681 u=root |  changed: [172.16.52.169]
+2016-08-20 15:17:13,093 p=18681 u=root |   [WARNING]: Consider using template or lineinfile module rather than running sed
+
+2016-08-20 15:17:13,101 p=18681 u=root |  TASK [sed mysql path] **********************************************************
+2016-08-20 15:17:15,998 p=18681 u=root |  changed: [172.16.52.169]
+2016-08-20 15:17:16,007 p=18681 u=root |  TASK [sed mysql BP] ************************************************************
+2016-08-20 15:17:18,737 p=18681 u=root |  changed: [172.16.52.169]
+2016-08-20 15:17:18,746 p=18681 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 15:17:18,746 p=18681 u=root |  172.16.52.169              : ok=8    changed=7    unreachable=0    failed=0   
+2016-08-20 15:27:09,782 p=20288 u=root |  PLAY [execute shell] ***********************************************************
+2016-08-20 15:27:09,839 p=20288 u=root |  TASK [setup] *******************************************************************
+2016-08-20 15:27:14,946 p=20288 u=root |  ok: [20.10.1.31]
+2016-08-20 15:27:14,956 p=20288 u=root |  TASK [check: 检查mysql目录是否已经存在 存在则退出] ********************************************
+2016-08-20 15:27:18,726 p=20288 u=root |  changed: [20.10.1.31]
+2016-08-20 15:27:18,734 p=20288 u=root |  TASK [mkdir] *******************************************************************
+2016-08-20 15:27:22,321 p=20288 u=root |  changed: [20.10.1.31]
+2016-08-20 15:27:22,327 p=20288 u=root |   [WARNING]: Consider using file module with state=directory rather than running mkdir
+
+2016-08-20 15:27:22,336 p=20288 u=root |  TASK [chown] *******************************************************************
+2016-08-20 15:27:25,629 p=20288 u=root |  changed: [20.10.1.31]
+2016-08-20 15:27:25,631 p=20288 u=root |   [WARNING]: Consider using file module with owner rather than running chown
+
+2016-08-20 15:27:25,639 p=20288 u=root |  TASK [copy config file] ********************************************************
+2016-08-20 15:27:29,074 p=20288 u=root |   [ERROR]: User interrupted execution
+
+2016-08-20 15:28:04,155 p=20322 u=root |  ERROR! the playbook: 1.install_mysql.yuml could not be found
+2016-08-20 15:28:12,318 p=20329 u=root |  PLAY [add mysql user and install mysql] ****************************************
+2016-08-20 15:28:12,374 p=20329 u=root |  TASK [setup] *******************************************************************
+2016-08-20 15:28:18,134 p=20329 u=root |  ok: [20.10.1.31]
+2016-08-20 15:28:18,145 p=20329 u=root |  TASK [install rpm package] *****************************************************
+2016-08-20 15:28:39,632 p=20329 u=root |  fatal: [20.10.1.31]: FAILED! => {"changed": true, "cmd": "rpm -ivh http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm", "delta": "0:00:17.945531", "end": "2016-08-24 10:53:03.124391", "failed": true, "rc": 1, "start": "2016-08-24 10:52:45.178860", "stderr": "\tpackage percona-release-0.1-3.noarch is already installed", "stdout": "Retrieving http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm\nPreparing...                ##################################################", "stdout_lines": ["Retrieving http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm", "Preparing...                ##################################################"], "warnings": ["Consider using yum, dnf or zypper module rather than running rpm"]}
+2016-08-20 15:28:39,637 p=20329 u=root |  NO MORE HOSTS LEFT *************************************************************
+2016-08-20 15:28:39,640 p=20329 u=root |   [WARNING]: Could not create retry file '1.init_mysql_base.retry'.         [Errno 2] No such file or directory: ''
+
+2016-08-20 15:28:39,640 p=20329 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 15:28:39,640 p=20329 u=root |  20.10.1.31                 : ok=1    changed=0    unreachable=0    failed=1   
+2016-08-20 15:30:32,481 p=20358 u=root |  PLAY [add mysql user and install mysql] ****************************************
+2016-08-20 15:30:32,530 p=20358 u=root |  TASK [setup] *******************************************************************
+2016-08-20 15:30:37,050 p=20358 u=root |  ok: [20.10.1.31]
+2016-08-20 15:30:37,058 p=20358 u=root |  TASK [install rpm package] *****************************************************
+2016-08-20 15:30:47,601 p=20358 u=root |  fatal: [20.10.1.31]: FAILED! => {"changed": true, "cmd": "rpm -ivh http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm", "delta": "0:00:07.224358", "end": "2016-08-24 10:55:11.162839", "failed": true, "rc": 1, "start": "2016-08-24 10:55:03.938481", "stderr": "\tpackage percona-release-0.1-3.noarch is already installed", "stdout": "Retrieving http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm\nPreparing...                ##################################################", "stdout_lines": ["Retrieving http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm", "Preparing...                ##################################################"], "warnings": ["Consider using yum, dnf or zypper module rather than running rpm"]}
+2016-08-20 15:30:47,607 p=20358 u=root |  NO MORE HOSTS LEFT *************************************************************
+2016-08-20 15:30:47,610 p=20358 u=root |   [WARNING]: Could not create retry file '1.init_mysql_base.retry'.         [Errno 2] No such file or directory: ''
+
+2016-08-20 15:30:47,610 p=20358 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 15:30:47,610 p=20358 u=root |  20.10.1.31                 : ok=1    changed=0    unreachable=0    failed=1   
+2016-08-20 15:31:48,628 p=20381 u=root |  PLAY [add mysql user and install mysql] ****************************************
+2016-08-20 15:31:48,675 p=20381 u=root |  TASK [setup] *******************************************************************
+2016-08-20 15:31:53,671 p=20381 u=root |  ok: [20.10.1.31]
+2016-08-20 15:31:53,681 p=20381 u=root |  TASK [install rpm package] *****************************************************
+2016-08-20 15:32:13,471 p=20381 u=root |  changed: [20.10.1.31]
+2016-08-20 15:32:13,472 p=20381 u=root |   [WARNING]: Consider using yum, dnf or zypper module rather than running rpm
+
+2016-08-20 15:32:13,480 p=20381 u=root |  TASK [install mysql] ***********************************************************
+2016-08-20 15:46:58,728 p=20381 u=root |  changed: [20.10.1.31]
+2016-08-20 15:46:58,729 p=20381 u=root |   [WARNING]: Consider using yum module rather than running yum
+
+2016-08-20 15:46:58,738 p=20381 u=root |  TASK [add user] ****************************************************************
+2016-08-20 15:47:02,388 p=20381 u=root |  fatal: [20.10.1.31]: FAILED! => {"changed": true, "cmd": "useradd mysql", "delta": "0:00:00.018630", "end": "2016-08-24 11:11:26.426235", "failed": true, "rc": 9, "start": "2016-08-24 11:11:26.407605", "stderr": "useradd: user 'mysql' already exists", "stdout": "", "stdout_lines": [], "warnings": []}
+2016-08-20 15:47:02,396 p=20381 u=root |  NO MORE HOSTS LEFT *************************************************************
+2016-08-20 15:47:02,398 p=20381 u=root |   [WARNING]: Could not create retry file '1.init_mysql_base.retry'.         [Errno 2] No such file or directory: ''
+
+2016-08-20 15:47:02,398 p=20381 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 15:47:02,399 p=20381 u=root |  20.10.1.31                 : ok=3    changed=2    unreachable=0    failed=1   
+2016-08-20 15:49:13,165 p=20484 u=root |  PLAY [execute shell] ***********************************************************
+2016-08-20 15:49:13,218 p=20484 u=root |  TASK [setup] *******************************************************************
+2016-08-20 15:49:18,139 p=20484 u=root |  ok: [20.10.1.31]
+2016-08-20 15:49:18,148 p=20484 u=root |  TASK [check: 检查mysql目录是否已经存在 存在则退出] ********************************************
+2016-08-20 15:49:21,804 p=20484 u=root |  changed: [20.10.1.31]
+2016-08-20 15:49:21,812 p=20484 u=root |  TASK [mkdir] *******************************************************************
+2016-08-20 15:49:28,210 p=20484 u=root |  changed: [20.10.1.31]
+2016-08-20 15:49:28,213 p=20484 u=root |   [WARNING]: Consider using file module with state=directory rather than running mkdir
+
+2016-08-20 15:49:28,220 p=20484 u=root |  TASK [chown] *******************************************************************
+2016-08-20 15:49:31,677 p=20484 u=root |  changed: [20.10.1.31]
+2016-08-20 15:49:31,678 p=20484 u=root |   [WARNING]: Consider using file module with owner rather than running chown
+
+2016-08-20 15:49:31,688 p=20484 u=root |  TASK [copy config file] ********************************************************
+2016-08-20 15:49:35,775 p=20484 u=root |  fatal: [20.10.1.31]: FAILED! => {"changed": true, "failed": true, "msg": "Aborting, target uses selinux but python bindings (libselinux-python) aren't installed!"}
+2016-08-20 15:49:35,782 p=20484 u=root |  NO MORE HOSTS LEFT *************************************************************
+2016-08-20 15:49:35,784 p=20484 u=root |   [WARNING]: Could not create retry file '2.install_mysql.retry'.         [Errno 2] No such file or directory: ''
+
+2016-08-20 15:49:35,784 p=20484 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 15:49:35,785 p=20484 u=root |  20.10.1.31                 : ok=4    changed=3    unreachable=0    failed=1   
+2016-08-20 15:51:02,728 p=20525 u=root |  PLAY [execute shell] ***********************************************************
+2016-08-20 15:51:02,784 p=20525 u=root |  TASK [setup] *******************************************************************
+2016-08-20 15:51:07,575 p=20525 u=root |  ok: [20.10.1.31]
+2016-08-20 15:51:07,584 p=20525 u=root |  TASK [check: 检查mysql目录是否已经存在 存在则退出] ********************************************
+2016-08-20 15:51:11,062 p=20525 u=root |  changed: [20.10.1.31]
+2016-08-20 15:51:11,070 p=20525 u=root |  TASK [mkdir] *******************************************************************
+2016-08-20 15:51:14,574 p=20525 u=root |  changed: [20.10.1.31]
+2016-08-20 15:51:14,577 p=20525 u=root |   [WARNING]: Consider using file module with state=directory rather than running mkdir
+
+2016-08-20 15:51:14,584 p=20525 u=root |  TASK [chown] *******************************************************************
+2016-08-20 15:51:17,771 p=20525 u=root |  changed: [20.10.1.31]
+2016-08-20 15:51:17,772 p=20525 u=root |   [WARNING]: Consider using file module with owner rather than running chown
+
+2016-08-20 15:51:17,780 p=20525 u=root |  TASK [copy config file] ********************************************************
+2016-08-20 15:51:22,019 p=20525 u=root |  changed: [20.10.1.31]
+2016-08-20 15:51:22,027 p=20525 u=root |  TASK [sed mysql port] **********************************************************
+2016-08-20 15:51:25,335 p=20525 u=root |  changed: [20.10.1.31]
+2016-08-20 15:51:25,336 p=20525 u=root |   [WARNING]: Consider using template or lineinfile module rather than running sed
+
+2016-08-20 15:51:25,344 p=20525 u=root |  TASK [sed mysql path] **********************************************************
+2016-08-20 15:51:28,619 p=20525 u=root |  changed: [20.10.1.31]
+2016-08-20 15:51:28,629 p=20525 u=root |  TASK [sed mysql BP] ************************************************************
+2016-08-20 15:51:31,915 p=20525 u=root |  changed: [20.10.1.31]
+2016-08-20 15:51:31,924 p=20525 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 15:51:31,924 p=20525 u=root |  20.10.1.31                 : ok=8    changed=7    unreachable=0    failed=0   
+2016-08-20 16:03:50,004 p=20629 u=root |  PLAY [execute shell] ***********************************************************
+2016-08-20 16:03:50,057 p=20629 u=root |  TASK [setup] *******************************************************************
+2016-08-20 16:03:54,634 p=20629 u=root |  ok: [20.10.1.31]
+2016-08-20 16:03:54,642 p=20629 u=root |  TASK [check: 检查mysql目录是否已经存在 存在则退出] ********************************************
+2016-08-20 16:03:57,941 p=20629 u=root |  changed: [20.10.1.31]
+2016-08-20 16:03:57,949 p=20629 u=root |  TASK [mkdir] *******************************************************************
+2016-08-20 16:04:01,308 p=20629 u=root |  changed: [20.10.1.31]
+2016-08-20 16:04:01,311 p=20629 u=root |   [WARNING]: Consider using file module with state=directory rather than running mkdir
+
+2016-08-20 16:04:01,320 p=20629 u=root |  TASK [chown] *******************************************************************
+2016-08-20 16:04:04,413 p=20629 u=root |  changed: [20.10.1.31]
+2016-08-20 16:04:04,414 p=20629 u=root |   [WARNING]: Consider using file module with owner rather than running chown
+
+2016-08-20 16:04:04,423 p=20629 u=root |  TASK [copy config file] ********************************************************
+2016-08-20 16:04:08,448 p=20629 u=root |  changed: [20.10.1.31]
+2016-08-20 16:04:08,456 p=20629 u=root |  TASK [sed mysql port] **********************************************************
+2016-08-20 16:04:11,621 p=20629 u=root |  changed: [20.10.1.31]
+2016-08-20 16:04:11,622 p=20629 u=root |   [WARNING]: Consider using template or lineinfile module rather than running sed
+
+2016-08-20 16:04:11,630 p=20629 u=root |  TASK [sed mysql path] **********************************************************
+2016-08-20 16:04:14,808 p=20629 u=root |  changed: [20.10.1.31]
+2016-08-20 16:04:14,816 p=20629 u=root |  TASK [sed mysql BP] ************************************************************
+2016-08-20 16:04:18,076 p=20629 u=root |  changed: [20.10.1.31]
+2016-08-20 16:04:18,085 p=20629 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 16:04:18,085 p=20629 u=root |  20.10.1.31                 : ok=8    changed=7    unreachable=0    failed=0   
+2016-08-20 16:04:29,370 p=20675 u=root |  PLAY [初始化并启动数据库] ***************************************************************
+2016-08-20 16:04:29,424 p=20675 u=root |  TASK [setup] *******************************************************************
+2016-08-20 16:04:34,054 p=20675 u=root |  ok: [20.10.1.31]
+2016-08-20 16:04:34,063 p=20675 u=root |  TASK [初始化数据库] ******************************************************************
+2016-08-20 16:06:07,034 p=20675 u=root |  ok: [20.10.1.31]
+2016-08-20 16:06:07,042 p=20675 u=root |  TASK [启动数据库] *******************************************************************
+2016-08-20 16:06:10,001 p=20675 u=root |  ok: [20.10.1.31]
+2016-08-20 16:06:10,009 p=20675 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 16:06:10,010 p=20675 u=root |  20.10.1.31                 : ok=3    changed=0    unreachable=0    failed=0   
+2016-08-20 16:10:55,228 p=20719 u=root |  playbook: 3.shell.yuml
+2016-08-20 16:11:45,003 p=20725 u=root |  PLAY [初始化并启动数据库] ***************************************************************
+2016-08-20 16:11:45,051 p=20725 u=root |  TASK [setup] *******************************************************************
+2016-08-20 16:11:49,521 p=20725 u=root |  ok: [20.10.1.31]
+2016-08-20 16:11:49,531 p=20725 u=root |  TASK [初始化数据库] ******************************************************************
+2016-08-20 16:12:03,319 p=20725 u=root |  ok: [20.10.1.31]
+2016-08-20 16:12:03,326 p=20725 u=root |  TASK [启动数据库] *******************************************************************
+2016-08-20 16:12:06,126 p=20725 u=root |  ok: [20.10.1.31]
+2016-08-20 16:12:06,134 p=20725 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 16:12:06,134 p=20725 u=root |  20.10.1.31                 : ok=3    changed=0    unreachable=0    failed=0   
+2016-08-20 16:14:19,825 p=20771 u=root |  PLAY [初始化并启动数据库] ***************************************************************
+2016-08-20 16:14:19,871 p=20771 u=root |  TASK [setup] *******************************************************************
+2016-08-20 16:14:24,381 p=20771 u=root |  ok: [20.10.1.31]
+2016-08-20 16:14:24,391 p=20771 u=root |  TASK [初始化数据库] ******************************************************************
+2016-08-20 16:14:33,163 p=20771 u=root |  ok: [20.10.1.31]
+2016-08-20 16:14:33,172 p=20771 u=root |  TASK [sleep 5] *****************************************************************
+2016-08-20 16:14:41,426 p=20771 u=root |  ok: [20.10.1.31]
+2016-08-20 16:14:41,436 p=20771 u=root |  TASK [启动数据库] *******************************************************************
+2016-08-20 16:14:44,202 p=20771 u=root |  ok: [20.10.1.31]
+2016-08-20 16:14:44,212 p=20771 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 16:14:44,212 p=20771 u=root |  20.10.1.31                 : ok=4    changed=0    unreachable=0    failed=0   
+2016-08-20 18:31:05,665 p=21351 u=root |  playbook: 3.shell.yuml
+2016-08-20 18:31:10,633 p=21356 u=root |  PLAY [初始化并启动数据库] ***************************************************************
+2016-08-20 18:31:10,683 p=21356 u=root |  TASK [setup] *******************************************************************
+2016-08-20 18:31:15,772 p=21356 u=root |  ok: [20.10.1.31]
+2016-08-20 18:31:15,782 p=21356 u=root |  TASK [sleep 5] *****************************************************************
+2016-08-20 18:31:23,638 p=21356 u=root |  ok: [20.10.1.31]
+2016-08-20 18:31:23,645 p=21356 u=root |  TASK [启动数据库] *******************************************************************
+2016-08-20 18:31:26,341 p=21356 u=root |  ok: [20.10.1.31]
+2016-08-20 18:31:26,350 p=21356 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 18:31:26,350 p=21356 u=root |  20.10.1.31                 : ok=3    changed=0    unreachable=0    failed=0   
+2016-08-20 18:32:06,739 p=21384 u=root |  PLAY [初始化并启动数据库] ***************************************************************
+2016-08-20 18:32:06,782 p=21384 u=root |  TASK [setup] *******************************************************************
+2016-08-20 18:32:09,917 p=21384 u=root |   [ERROR]: User interrupted execution
+
+2016-08-20 18:32:23,575 p=21398 u=root |  PLAY [初始化并启动数据库] ***************************************************************
+2016-08-20 18:32:23,626 p=21398 u=root |  TASK [setup] *******************************************************************
+2016-08-20 18:32:28,245 p=21398 u=root |  ok: [20.10.1.31]
+2016-08-20 18:32:28,253 p=21398 u=root |  TASK [sleep 5] *****************************************************************
+2016-08-20 18:32:32,000 p=21398 u=root |  ok: [20.10.1.31]
+2016-08-20 18:32:32,007 p=21398 u=root |  TASK [启动数据库] *******************************************************************
+2016-08-20 18:32:34,725 p=21398 u=root |  ok: [20.10.1.31]
+2016-08-20 18:32:34,734 p=21398 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 18:32:34,734 p=21398 u=root |  20.10.1.31                 : ok=3    changed=0    unreachable=0    failed=0   
+2016-08-20 18:46:16,802 p=21542 u=root |  playbook: shell.yuml
+2016-08-20 18:46:20,336 p=21547 u=root |  PLAY [execute shell] ***********************************************************
+2016-08-20 18:46:20,390 p=21547 u=root |  TASK [setup] *******************************************************************
+2016-08-20 18:46:25,152 p=21547 u=root |  ok: [20.10.1.31]
+2016-08-20 18:46:25,162 p=21547 u=root |  TASK [初始化数据库] ******************************************************************
+2016-08-20 18:47:22,252 p=21547 u=root |   [ERROR]: User interrupted execution
+
+2016-08-20 18:47:59,815 p=21571 u=root |  PLAY [execute shell] ***********************************************************
+2016-08-20 18:47:59,877 p=21571 u=root |  TASK [setup] *******************************************************************
+2016-08-20 18:48:04,723 p=21571 u=root |  ok: [20.10.1.31]
+2016-08-20 18:48:04,731 p=21571 u=root |  TASK [初始化数据库] ******************************************************************
+2016-08-20 18:49:36,740 p=21571 u=root |   [ERROR]: User interrupted execution
+
+2016-08-20 18:49:45,185 p=21597 u=root |  PLAY [execute shell] ***********************************************************
+2016-08-20 18:49:45,238 p=21597 u=root |  TASK [setup] *******************************************************************
+2016-08-20 18:49:49,628 p=21597 u=root |  ok: [20.10.1.31]
+2016-08-20 18:49:49,637 p=21597 u=root |  TASK [初始化数据库] ******************************************************************
+2016-08-20 18:49:54,367 p=21597 u=root |  fatal: [20.10.1.31]: FAILED! => {"changed": true, "cmd": "nohup mysqld_safe --defaults-file=/usr/local/mysql/multi/3309/conf/my.cnf --user=mysql `&`", "delta": "0:00:01.329827", "end": "2016-08-24 14:14:24.133403", "failed": true, "rc": 1, "start": "2016-08-24 14:14:22.803576", "stderr": "/bin/sh: command substitution: line 0: syntax error near unexpected token `&'\n/bin/sh: command substitution: line 0: `&'\n160824 14:14:24 mysqld_safe A mysqld process already exists", "stdout": "160824 14:14:24 mysqld_safe Logging to '/usr/local/mysql/multi/3309/log/mysql-error.log'.", "stdout_lines": ["160824 14:14:24 mysqld_safe Logging to '/usr/local/mysql/multi/3309/log/mysql-error.log'."], "warnings": []}
+2016-08-20 18:49:54,373 p=21597 u=root |  NO MORE HOSTS LEFT *************************************************************
+2016-08-20 18:49:54,376 p=21597 u=root |   [WARNING]: Could not create retry file 'shell.retry'.         [Errno 2] No such file or directory: ''
+
+2016-08-20 18:49:54,376 p=21597 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 18:49:54,377 p=21597 u=root |  20.10.1.31                 : ok=1    changed=0    unreachable=0    failed=1   
+2016-08-20 18:50:36,078 p=21624 u=root |  playbook: shell.yuml
+2016-08-20 18:51:01,508 p=21630 u=root |  playbook: shell.yuml
+2016-08-20 18:51:04,389 p=21635 u=root |  PLAY [execute shell] ***********************************************************
+2016-08-20 18:51:04,441 p=21635 u=root |  TASK [setup] *******************************************************************
+2016-08-20 18:51:08,939 p=21635 u=root |  ok: [20.10.1.31]
+2016-08-20 18:51:08,948 p=21635 u=root |  TASK [初始化数据库] ******************************************************************
+2016-08-20 18:52:17,470 p=21635 u=root |  fatal: [20.10.1.31]: FAILED! => {"changed": true, "cmd": "nohup mysqld_safe --defaults-file=/usr/local/mysql/multi/3309/conf/my.cnf --user=mysql `&`;exit", "delta": "0:01:05.316597", "end": "2016-08-24 14:16:47.287219", "failed": true, "rc": -15, "start": "2016-08-24 14:15:41.970622", "stderr": "/bin/sh: command substitution: line 0: syntax error near unexpected token `&'\n/bin/sh: command substitution: line 0: `&'", "stdout": "160824 14:15:43 mysqld_safe Logging to '/usr/local/mysql/multi/3309/log/mysql-error.log'.\n160824 14:15:43 mysqld_safe Starting mysqld daemon with databases from /usr/local/mysql/multi/3309/data", "stdout_lines": ["160824 14:15:43 mysqld_safe Logging to '/usr/local/mysql/multi/3309/log/mysql-error.log'.", "160824 14:15:43 mysqld_safe Starting mysqld daemon with databases from /usr/local/mysql/multi/3309/data"], "warnings": []}
+2016-08-20 18:52:17,476 p=21635 u=root |  NO MORE HOSTS LEFT *************************************************************
+2016-08-20 18:52:17,480 p=21635 u=root |   [WARNING]: Could not create retry file 'shell.retry'.         [Errno 2] No such file or directory: ''
+
+2016-08-20 18:52:17,480 p=21635 u=root |  PLAY RECAP *********************************************************************
+2016-08-20 18:52:17,480 p=21635 u=root |  20.10.1.31                 : ok=1    changed=0    unreachable=0    failed=1   
