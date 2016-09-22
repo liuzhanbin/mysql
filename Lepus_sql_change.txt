@@ -1,0 +1,2 @@
+##新增加的redis内存报警，发现无法查询历史图，需要对历史表增加相应字段，具体如下
+alter table redis_status_history add `maxmemory` bigint(20) NOT NULL DEFAULT '-1' after create_time;
