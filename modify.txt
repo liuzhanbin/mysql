@@ -1,0 +1,5 @@
+1.replication  --  20161121
+对于之前一直无法查看复制图表的情况做如下更改：
+vi lepus/application/controllers/lp_mysql.php
+337行，去掉'mysql/replication'，改为parent::check_privilege();
+原来为parent::check_privilege('mysql/replication'）;
