@@ -12,7 +12,7 @@
      shell: mkdir -p {{ mysql_path }}/{{ mysql_port }}/{conf,data,tmp,binlog,log,socket,pid} 
      
    - name: chown
-     shell: chown -R mysql.mysql /usr/local/mysql
+     shell: chown -R mysql.mysql {{ mysql_path }}
 
    - name: copy config file
      template: src=./my.cnf.temp dest={{ mysql_path }}/{{ mysql_port }}/conf/my.cnf owner=mysql group=mysql mode=0644
