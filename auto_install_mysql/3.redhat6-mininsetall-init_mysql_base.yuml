@@ -1,0 +1,15 @@
+---
+- name: add mysql user and install mysql
+  hosts: mysql
+  max_fail_percentage: 2
+  tasks:
+        - name: copy file from control machine to remote host
+          unarchive: src=./MySQL-5.6.37-1.el6.x86_64.rpm-bundle.tar dest=/tmp/ copy=yes
+
+        - name: install mysql
+          shell: cd /tmp;yum -y remove mysql-libs;yum -y install libselinux-python;yum -y localinstall MySQL-server-5.6.37-1.el6.x86_64.rpm;yum -y localinstall MySQL-client-5.6.37-1.el6.x86_64.rpm
+          register: shell_output
+
+        - name: add user
+          shell: useradd mysql
+          register: shell_output

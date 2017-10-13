@@ -58,6 +58,7 @@ skip_slave_start
 slave_net_timeout              = 60
 relay-log-info-repository      = TABLE
 slave_compressed_protocol      = ON
+slave_parallel_workers         = 10
 
 # CACHES AND LIMITS #
 max_connections                = 5000
@@ -97,7 +98,7 @@ innodb_open_files              = 10000
 innodb_purge_threads           = 4
 innodb_read_io_threads         = 8
 innodb_write_io_threads        = 8
-innodb_show_verbose_locks      = 1
+#innodb_show_verbose_locks      = 1
 innodb_sync_spin_loops         = 30
 innodb_thread_concurrency      = 24
 innodb_print_all_deadlocks     = 1
