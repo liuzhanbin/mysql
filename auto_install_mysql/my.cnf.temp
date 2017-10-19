@@ -31,7 +31,7 @@ transaction_isolation          = REPEATABLE-READ
 explicit_defaults_for_timestamp = 1
 
 # DATA STORAGE #
-basedir                        = /usr/
+basedir                        = /usr/local/mysql56
 datadir                        = mysql_path/mysql_port/data
 tmpdir                         = mysql_path/mysql_port/tmp
 

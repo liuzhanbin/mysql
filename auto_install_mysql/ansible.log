@@ -425,3 +425,65 @@ sed
 
 2017-10-13 14:31:45,768 p=64770 u=tbj |  PLAY RECAP ********************************************************************************************************
 2017-10-13 14:31:45,768 p=64770 u=tbj |  192.168.1.18               : ok=8    changed=7    unreachable=1    failed=0   
+2017-10-19 17:02:08,066 p=16192 u=root |  PLAY [add mysql user and install mysql] ***************************************************************************
+2017-10-19 17:02:08,103 p=16192 u=root |  TASK [Gathering Facts] ********************************************************************************************
+2017-10-19 17:02:12,542 p=16192 u=root |  ok: [127.0.0.1]
+2017-10-19 17:02:12,546 p=16192 u=root |  TASK [copy file from control machine to remote host] **************************************************************
+2017-10-19 17:02:53,927 p=16192 u=root |  changed: [127.0.0.1]
+2017-10-19 17:02:53,930 p=16192 u=root |  TASK [install mysql] **********************************************************************************************
+2017-10-19 17:02:58,577 p=16192 u=root |  changed: [127.0.0.1]
+2017-10-19 17:02:58,581 p=16192 u=root |  TASK [add user] ***************************************************************************************************
+2017-10-19 17:02:59,696 p=16192 u=root |  changed: [127.0.0.1]
+2017-10-19 17:02:59,700 p=16192 u=root |  TASK [config path] ************************************************************************************************
+2017-10-19 17:03:00,639 p=16192 u=root |  changed: [127.0.0.1]
+2017-10-19 17:03:00,641 p=16192 u=root |  PLAY RECAP ********************************************************************************************************
+2017-10-19 17:03:00,641 p=16192 u=root |  127.0.0.1                  : ok=5    changed=4    unreachable=0    failed=0   
+2017-10-19 17:04:50,004 p=16573 u=root |  PLAY [execute shell] **********************************************************************************************
+2017-10-19 17:04:50,038 p=16573 u=root |  TASK [Gathering Facts] ********************************************************************************************
+2017-10-19 17:04:51,552 p=16573 u=root |  ok: [127.0.0.1]
+2017-10-19 17:04:51,556 p=16573 u=root |  TASK [check: 检查mysql目录是否已经存在 存在则退出] *******************************************************************************
+2017-10-19 17:04:52,548 p=16573 u=root |  changed: [127.0.0.1]
+2017-10-19 17:04:52,553 p=16573 u=root |  TASK [mkdir] ******************************************************************************************************
+2017-10-19 17:04:53,510 p=16573 u=root |   [WARNING]: Consider using file module with state=directory rather than running mkdir
+
+2017-10-19 17:04:53,511 p=16573 u=root |  changed: [127.0.0.1]
+2017-10-19 17:04:53,515 p=16573 u=root |  TASK [chown] ******************************************************************************************************
+2017-10-19 17:04:54,469 p=16573 u=root |   [WARNING]: Consider using file module with owner rather than running chown
+
+2017-10-19 17:04:54,470 p=16573 u=root |  changed: [127.0.0.1]
+2017-10-19 17:04:54,474 p=16573 u=root |  TASK [copy config file] *******************************************************************************************
+2017-10-19 17:04:56,367 p=16573 u=root |  fatal: [127.0.0.1]: FAILED! => {"changed": true, "failed": true, "msg": "Aborting, target uses selinux but python bindings (libselinux-python) aren't installed!"}
+2017-10-19 17:04:56,368 p=16573 u=root |  	to retry, use: --limit @/usr/local/dba/mysql/auto_install_mysql/2.install_mysql.retry
+
+2017-10-19 17:04:56,368 p=16573 u=root |  PLAY RECAP ********************************************************************************************************
+2017-10-19 17:04:56,369 p=16573 u=root |  127.0.0.1                  : ok=4    changed=3    unreachable=0    failed=1   
+2017-10-19 17:09:39,710 p=16947 u=root |  ERROR! the playbook: 2.install_mysql. could not be found
+2017-10-19 17:09:42,094 p=16952 u=root |  PLAY [execute shell] **********************************************************************************************
+2017-10-19 17:09:42,127 p=16952 u=root |  TASK [Gathering Facts] ********************************************************************************************
+2017-10-19 17:09:43,965 p=16952 u=root |  ok: [127.0.0.1]
+2017-10-19 17:09:43,969 p=16952 u=root |  TASK [check: 检查mysql目录是否已经存在 存在则退出] *******************************************************************************
+2017-10-19 17:09:44,999 p=16952 u=root |  changed: [127.0.0.1]
+2017-10-19 17:09:45,003 p=16952 u=root |  TASK [mkdir] ******************************************************************************************************
+2017-10-19 17:09:45,942 p=16952 u=root |   [WARNING]: Consider using file module with state=directory rather than running mkdir
+
+2017-10-19 17:09:45,942 p=16952 u=root |  changed: [127.0.0.1]
+2017-10-19 17:09:45,946 p=16952 u=root |  TASK [chown] ******************************************************************************************************
+2017-10-19 17:09:46,878 p=16952 u=root |   [WARNING]: Consider using file module with owner rather than running chown
+
+2017-10-19 17:09:46,878 p=16952 u=root |  changed: [127.0.0.1]
+2017-10-19 17:09:46,883 p=16952 u=root |  TASK [copy config file] *******************************************************************************************
+2017-10-19 17:09:48,896 p=16952 u=root |  changed: [127.0.0.1]
+2017-10-19 17:09:48,900 p=16952 u=root |  TASK [sed mysql port] *********************************************************************************************
+2017-10-19 17:09:49,861 p=16952 u=root |   [WARNING]: Consider using template or lineinfile module rather than running sed
+
+2017-10-19 17:09:49,862 p=16952 u=root |  changed: [127.0.0.1]
+2017-10-19 17:09:49,866 p=16952 u=root |  TASK [sed mysql path] *********************************************************************************************
+2017-10-19 17:09:50,768 p=16952 u=root |  changed: [127.0.0.1]
+2017-10-19 17:09:50,772 p=16952 u=root |  TASK [sed mysql BP] ***********************************************************************************************
+2017-10-19 17:09:51,712 p=16952 u=root |  changed: [127.0.0.1]
+2017-10-19 17:09:51,717 p=16952 u=root |  TASK [初始化数据库] *****************************************************************************************************
+2017-10-19 17:09:52,812 p=16952 u=root |  fatal: [127.0.0.1]: FAILED! => {"changed": true, "cmd": "cd /usr/local/mysql56/; ./scripts/mysql_install_db --defaults-file=/home/tbj/mysql/multi/3306/conf/my.cnf --user=mysql", "delta": "0:00:00.161902", "end": "2017-10-19 17:09:52.755521", "failed": true, "rc": 1, "start": "2017-10-19 17:09:52.593619", "stderr": "", "stderr_lines": [], "stdout": "FATAL ERROR: Neither host 'putin-191.com' nor 'localhost' could be looked up with\n/usr//bin/resolveip\nPlease configure the 'hostname' command to return a correct\nhostname.\nIf you want to solve this at a later stage, restart this script\nwith the --force option", "stdout_lines": ["FATAL ERROR: Neither host 'putin-191.com' nor 'localhost' could be looked up with", "/usr//bin/resolveip", "Please configure the 'hostname' command to return a correct", "hostname.", "If you want to solve this at a later stage, restart this script", "with the --force option"]}
+2017-10-19 17:09:52,814 p=16952 u=root |  	to retry, use: --limit @/usr/local/dba/mysql/auto_install_mysql/2.install_mysql.retry
+
+2017-10-19 17:09:52,814 p=16952 u=root |  PLAY RECAP ********************************************************************************************************
+2017-10-19 17:09:52,814 p=16952 u=root |  127.0.0.1                  : ok=8    changed=7    unreachable=0    failed=1   

@@ -4,12 +4,16 @@
   max_fail_percentage: 2
   tasks:
         - name: copy file from control machine to remote host
-          unarchive: src=./MySQL-5.6.37-1.el6.x86_64.rpm-bundle.tar dest=/tmp/ copy=yes
+          unarchive: src=./mysql_install_packages/mysql-5.6.38-linux-glibc2.12-x86_64.tar.gz dest=/tmp/ copy=yes
 
         - name: install mysql
-          shell: cd /tmp;yum -y remove mysql-libs;yum -y install libselinux-python;yum -y localinstall MySQL-server-5.6.37-1.el6.x86_64.rpm;yum -y localinstall MySQL-client-5.6.37-1.el6.x86_64.rpm
+          shell: mv /tmp/mysql-5.6.38-linux-glibc2.12-x86_64 /usr/local/mysql56;yum -y install autoconf libselinux-python numactl
           register: shell_output
 
         - name: add user
           shell: useradd mysql
+          register: shell_output
+
+        - name: config path
+          shell: echo "export PATH=/usr/local/mysql56/bin:$PATH" >> /root/.bashrc;source /root/.bashrc
           register: shell_output

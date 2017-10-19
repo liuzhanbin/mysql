@@ -30,4 +30,5 @@
      register: shell_output
   
    - name: '初始化数据库'
-     raw: 'mysql_install_db --defaults-file={{ mysql_path }}/{{ mysql_port }}/conf/my.cnf --user=mysql  '
+     shell: cd /usr/local/mysql56/; ./scripts/mysql_install_db --defaults-file={{ mysql_path }}/{{ mysql_port }}/conf/my.cnf --user=mysql
+
