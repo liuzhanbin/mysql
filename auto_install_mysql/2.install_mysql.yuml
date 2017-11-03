@@ -20,6 +20,10 @@
    - name: 'sed mysql port'
      shell: sed -i 's/mysql_port/{{ mysql_port }}/g' {{ mysql_path }}/{{ mysql_port }}/conf/my.cnf
      register: shell_output
+
+   - name: 'sed mysql server_id'
+     shell: sed -i 's/serverid/{{ serverid }}/g' {{ mysql_path }}/{{ mysql_port }}/conf/my.cnf
+     register: shell_output
    
    - name: 'sed mysql path'
      shell: sed -i 's!mysql_path!{{ mysql_path }}!g' {{ mysql_path }}/{{ mysql_port }}/conf/my.cnf
