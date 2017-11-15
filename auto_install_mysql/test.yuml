@@ -1,7 +1,0 @@
----
-- name: execute shell
-  hosts: mysql
-  tasks:
-   - name: '初始化数据库'
-     shell: 'nohup mysqld_safe --defaults-file={{ mysql_path }}/{{ mysql_port }}/conf/my.cnf --user=mysql `&`;exit'
-     #register: shell_output

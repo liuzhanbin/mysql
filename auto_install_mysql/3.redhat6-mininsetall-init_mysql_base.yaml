@@ -7,7 +7,7 @@
           unarchive: src=./mysql_install_packages/mysql-5.6.38-linux-glibc2.12-x86_64.tar.gz dest=/tmp/ copy=yes
 
         - name: install mysql
-          shell: mv /tmp/mysql-5.6.38-linux-glibc2.12-x86_64 /usr/local/mysql56;yum -y install autoconf libselinux-python numactl
+          shell: mv /tmp/mysql-5.6.38-linux-glibc2.12-x86_64 /usr/local/mysql56
           register: shell_output
 
         - name: add user

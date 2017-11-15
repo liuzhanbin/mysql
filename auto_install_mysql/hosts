@@ -2,10 +2,11 @@
 [nginx:vars]
 ansible_python_interpreters=/usr/bin/python2.6
 [mysql]
-192.168.1.126
+192.168.1.102 serverid=1023306
 [mysql:vars]
 ansible_python_interpreters=/usr/bin/python2.6
 mysql_port=3306
 bufferpool=1GB
-serverid=1263306
+pkg_name=mysql-5.6.38-linux-glibc2.12-x86_64
 mysql_path=/opt/mysql
+
