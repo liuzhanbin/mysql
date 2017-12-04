@@ -1,12 +1,19 @@
-[nginx]
-[nginx:vars]
+[backup]
+192.168.1.102
+[backup:vars]
+remote_backup_ip=172.16.7.150
 ansible_python_interpreters=/usr/bin/python2.6
+
 [mysql]
-192.168.1.102 serverid=1023306
+master ansible_ssh_host=192.168.1.102 serverid=1023306 mysql_port=3306 bufferpool=1GB
+slave1 ansible_ssh_host=192.168.1.101 serverid=1013306 mysql_port=3306 bufferpool=1GB
 [mysql:vars]
+master_ip=192.168.1.102
+master_port=3306
+slave_ips=192.168.%
 ansible_python_interpreters=/usr/bin/python2.6
-mysql_port=3306
-bufferpool=1GB
 pkg_name=mysql-5.6.38-linux-glibc2.12-x86_64
 mysql_path=/opt/mysql
+sql=delete from mysql.user where host!='127.0.0.1' and user!='root';flush privileges;
+
 

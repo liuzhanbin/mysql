@@ -2,6 +2,7 @@ ansible安装
 
 yum -y install epel-release
 yum -y install ansible
+brew install ansible
 
 1.对于未进行ssh无密登陆的先进性ssh无密登陆设置。
 在目录ssh_autopass下，编辑ip_pass.txt，加入ip和相应的密码，执行 ssh-AutoSisInstaller.sh即可。

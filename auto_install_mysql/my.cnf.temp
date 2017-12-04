@@ -27,7 +27,7 @@ host_cache_size                = 0
 transaction-isolation = REPEATABLE-READ
 
 # DATA STORAGE #
-basedir                        = /usr/local/mysql56
+basedir                        = base_dir
 datadir                        = mysql_path/mysql_port/data
 tmpdir                         = mysql_path/mysql_port/tmp
 
@@ -45,7 +45,7 @@ master-info-repository         = TABLE
 
 # REPLICATION #
 log_slave_updates              = 1
-read_only                      = 1
+read_only=1
 relay_log                      = mysql_path/mysql_port/binlog/relay-bin
 relay_log_index                = mysql_path/mysql_port/binlog/relay-bin.index
 server_id                      = serverid
