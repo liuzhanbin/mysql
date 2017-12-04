@@ -1,0 +1,6 @@
+---
+- name: backup mysql
+  hosts: mysql
+#  serial: 1
+  tasks:
+

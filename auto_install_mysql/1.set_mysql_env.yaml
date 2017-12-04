@@ -1,0 +1,93 @@
+---
+- name: binary package install MySQL
+  hosts: mysql
+#  max_fail_percentage: 2
+  tasks:
+        - name: 查看是否有ignorespace设置
+          shell: grep "HISTCONTROL=ignorespace" /root/.bashrc
+          register: result        #通过结果进行判断
+          ignore_errors: True     #执行错误则忽略改错误,继续执行下列模块
+
+
+        - name: 是否进行ignorespace设置
+          shell: echo "export HISTCONTROL=ignorespace" >> /root/.bashrc;source /root/.bashrc
+          when: result|failed     #如果失败,则执行本次shell命令
+
+        - name: 查看是否有mysql path设置
+          shell: grep "{{ pkg_name }}" /root/.bashrc
+          register: result        #通过结果进行判断
+          ignore_errors: True     #执行错误则忽略改错误,继续执行下列模块
+
+
+        - name: 是否进行MySQL环境变量配置
+          shell: echo "export PATH=/usr/local/{{ pkg_name }}/bin:$PATH" >> /root/.bashrc;source /root/.bashrc
+          when: result|failed     #如果失败,则执行本次shell命令
+
+        - name: 'config yum'
+          shell: yum -y install wget yum-plugin-priorities;wget -P /etc/yum.repos.d/ http://172.16.33.205/Tbj-repo.repo;
+          register: shell_output
+
+#使用yum模块进行安装相应软件包,已列表模式提供包名,可以包括url,url以类似Linux的rpm安装方式进行安装
+        - name: 安装基础包
+          yum: pkg={{ item }} state=installed
+          with_items:
+            - epel-release
+            - vim
+            - screen
+            - telnet
+          tags:
+             - base_pkg
+
+#tags表示标记,执行时可以加上--tags="" ,或者--skip-tags="" ,来执行或者跳过指定的任务
+        - name: 安装数据库依赖包
+          yum: pkg={{ item }} state=installed
+          with_items:
+            - autoconf
+            - libselinux-python
+            - numactl
+            - iftop
+          tags:
+             - mysql_pkg
+
+#使用user模块创建用户,对于已经存在的用户没有家目录则创建家目录,但是不改变属组
+        - name: create mysql user
+          user:
+            name: mysql
+            state: present
+          tags:
+             - create_mysql
+
+#unarchive这个模块的效率太低了,独立执行为1m20s,比copy和tar(一起为50s)慢了20s。
+#        - name: copy file from control machine to remote host
+#          unarchive: src=./mysql_install_packages/{{ pkg_name }}.tar.gz dest=/usr/local copy=yes
+#          tags:
+#             - unarchive
+
+        - name: 查看是否有已经安装mysql包
+          shell: ls /usr/local/{{ pkg_name }}
+          register: result        #通过结果进行判断
+          ignore_errors: True     #执行错误则忽略改错误,继续执行下列模块
+
+
+        - name: copy
+          copy: src=./mysql_install_packages/{{ pkg_name }}.tar.gz dest=/tmp/
+          when: result|failed
+          tags:
+             - copy
+
+
+        - name: tar
+          shell: tar -xvf /tmp/{{ pkg_name }}.tar.gz -C /usr/local/
+          tags:
+             - tar
+
+#        - name: unar
+#          unarchive: src=/tmp/{{ pkg_name }}.tar.gz dest=/usr/local copy=no
+#          tags:
+#             - unar
+
+#
+#debug为打印模式,相当于print
+#        - name: print variable - serverid
+#          debug: var=serverid
+

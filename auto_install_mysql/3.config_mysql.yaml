@@ -1,0 +1,11 @@
+---
+- name: backup mysql
+  hosts: backup
+  serial: 1
+  tasks:
+        - name: 安装基础包
+          yum: pkg={{ item }} state=installed
+          with_items:
+            - percona-xtrabackup-24
+          tags:
+             - backup

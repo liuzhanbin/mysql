@@ -1,0 +1,96 @@
+---
+- name: start mysql
+  hosts: mysql
+#  serial: 1
+  tasks:
+
+   - name: 'check: 检查mysql目录是否已经存在 存在则退出'
+     shell: '[ ! -e {{ mysql_path }}/{{ mysql_port }} ] && echo "OK"'
+     register: shell_result
+     failed_when: '"OK" not in shell_result.stdout_lines'
+     
+   - name: mkdir
+     shell: mkdir -p {{ mysql_path }}/{{ mysql_port }}/{conf,data,tmp,binlog,log,socket,pid} 
+     
+   - name: chown
+     shell: chown -R mysql.mysql {{ mysql_path }}
+
+   - name: copy config file
+     template: src=./my.cnf.temp dest={{ mysql_path }}/{{ mysql_port }}/conf/my.cnf owner=mysql group=mysql mode=0644
+
+   - name: 'sed mysql port'
+     shell: sed -i 's/mysql_port/{{ mysql_port }}/g' {{ mysql_path }}/{{ mysql_port }}/conf/my.cnf
+     register: shell_output
+
+   - name: 'sed mysql server_id'
+     shell: sed -i 's/serverid/{{ serverid }}/g' {{ mysql_path }}/{{ mysql_port }}/conf/my.cnf
+     register: shell_output
+   
+   - name: 'sed mysql path'
+     shell: sed -i 's!mysql_path!{{ mysql_path }}!g' {{ mysql_path }}/{{ mysql_port }}/conf/my.cnf
+     register: shell_output
+
+   - name: 'sed mysql base path'
+     shell: sed -i 's!base_dir!/usr/local/{{ pkg_name }}!g' {{ mysql_path }}/{{ mysql_port }}/conf/my.cnf
+     register: shell_output
+   
+   - name: 'sed mysql BP'
+     shell: sed -i 's/bufferpool/{{ bufferpool }}/g' {{ mysql_path }}/{{ mysql_port }}/conf/my.cnf
+     register: shell_output
+
+   - name: 'sed master read only'
+     shell: sed -i 's/read_only=1/read_only=0/g' {{ mysql_path }}/{{ mysql_port }}/conf/my.cnf
+     register: shell_output
+     when: inventory_hostname == "master"
+
+   - name: '初始化数据库'
+     shell: cd /usr/local/{{ pkg_name }}/; ./scripts/mysql_install_db --defaults-file={{ mysql_path }}/{{ mysql_port }}/conf/my.cnf --user=mysql --force
+     register: result
+     tags:
+        - "install db"
+
+   - name: '启动数据库'
+     shell: /usr/local/{{ pkg_name }}/bin/mysqld_safe --defaults-file={{ mysql_path }}/{{ mysql_port }}/conf/my.cnf --user=mysql &
+     #when: result|success
+     register: shell_output
+     tags:
+        - "start"
+
+   - name: timed wait
+     pause: seconds=10
+
+   - name: '判断是否重启成功'
+     shell: netstat -nltp|grep 3306
+     register: result
+     ignore_errors: True
+     tags:
+        - "jugde"
+
+   - name: 'success'
+     debug:
+       msg: "success {{ mysql_port }}  启动成功,请执行命令(  )搭建搭建主从。"
+     when: result|success
+     tags:
+        - "debug"
+
+   - name: 'failed'
+     debug:
+       msg: "failed {{ mysql_port }}  启动失败,请检查!"
+     when: result|failed
+     tags:
+        - "debug1"
+
+   - name: 'execute sql'
+     shell: mysql -uroot -h127.0.0.1 -P{{ mysql_port }} -e "GRANT REPLICATION SLAVE ON *.* TO repl@'{{ slave_ips }}' IDENTIFIED BY PASSWORD '*AFAF2DF9E915DC4CADF3D97B30B754ACD59FEF97'; {{ item }} ; "
+     with_lines:
+      - cat ./mysql_init.sql
+     tags:
+        - "sql"
+
+   - name: 'start slave'
+     shell: mysql -uroot -h127.0.0.1 -P{{ mysql_port }} -p'tbj2017!' -e "CHANGE MASTER TO MASTER_HOST='{{ master_ip }}',MASTER_USER='repl',MASTER_PASSWORD='repl_2017.ok22',MASTER_PORT={{ master_port }},MASTER_LOG_FILE='mysql-bin.000001',MASTER_LOG_POS=120,MASTER_CONNECT_RETRY=10;start slave;"
+     #debug:q
+     #  msg: "{{ master_ip }},{{ master_port }}"
+     when: inventory_hostname != "master"
+     tags:
+        - "slave"
