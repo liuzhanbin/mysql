@@ -60,7 +60,7 @@
      pause: seconds=10
 
    - name: '判断是否重启成功'
-     shell: netstat -nltp|grep 3306
+     shell: netstat -nltp|grep {{ mysql_port }}
      register: result
      ignore_errors: True
      tags:

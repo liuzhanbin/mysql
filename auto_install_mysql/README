@@ -8,11 +8,24 @@ brew install ansible
 在目录ssh_autopass下，编辑ip_pass.txt，加入ip和相应的密码，执行 ssh-AutoSisInstaller.sh即可。
 
 2.对于已经ssh无密登陆的机器。
-先执行1.init_mysql_base.yuml，安装软件和依赖，创建用户。
-ansible-playbook 1.init_mysql_base.yuml
+a.修改hosts文件中的如下选项值:
+mysql模块的
+ansible_ssh_host、serverid、mysql_port、bufferpool
+master_ip、master_port、slave_ips、mysql_path、pkg_name
+backup模块的
+IP、port、remote_backup_ip、mysql_path、pkg_name
+b.修改脚本db_backup_full.sh和db_backup_day.sh中的如下选项:
+password、to_mail(不用引号)
 
-3.进行mysql批量安装并初始化,执行2.install_mysql.yuml
-ansible-playbook  2.install_mysql.yuml
+3.批量上线MySQL,配置备份和监控
+ansible-playbook main.yaml
 
-注意：未进行数据库的启动，暂时需要手工启动。
-mysqld_safe --defaults-file=/usr/local/mysql/multi/端口/conf/my.cnf --user=mysql &
+4.监控
+lepus: 平台操作添加监控
+openfalcon: 页面进行配置
+
+5.添加putin服务：
+用户配置
+流程管理
+步骤管理（数字越大，顺序越后）
+主库地址

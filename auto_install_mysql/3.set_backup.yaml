@@ -1,0 +1,108 @@
+---
+- name: backup mysql
+  hosts: backup
+  serial: 1
+  tasks:
+        - name: 安装基础包
+          yum: pkg={{ item }} state=installed
+          with_items:
+            - zlib
+            - zlib-devel
+            - nfs-utils
+            - portmap
+          tags:
+             - backup
+
+        - name: copy percona
+          shell: ls /usr/local/percona-xtrabackup-2.4.5-Linux-x86_64
+          register: result
+          ignore_errors: True
+
+        - name: copy percona
+          unarchive: src=./mysql_install_packages/percona-xtrabackup-2.4.5-Linux-x86_64.tar.gz dest=/usr/local copy=yes
+          when: result|failed
+          tags:
+             - unarchive
+
+        - name: copy percona
+          shell: ls /usr/local/pigz-2.3.4
+          register: result
+          ignore_errors: True
+
+        - name: copy pigz
+          unarchive: src=./mysql_install_packages/pigz-2.3.4.tar.gz dest=/usr/local copy=yes
+          when: result|failed
+          tags:
+             - unarchive
+
+        - name: 'pigz'
+          shell: cd /usr/local/pigz-2.3.4 && make
+          register: shell_output
+
+        - name: 'mkdir '
+          shell: mkdir -p /usr/local/dba/scripts;mkdir -p /usr/local/dba/backup_log
+          register: shell_output
+
+        - name: copy全备file
+          template: src=./db_backup_full.sh dest=/usr/local/dba/scripts/db_backup_full.sh_tmp mode=0644
+          register: shell_output
+
+        - name: 配置全备path
+          shell: echo "export PATH=/usr/local/pigz-2.3.4:/usr/local/{{ pkg_name }}/bin:$PATH" > /usr/local/dba/scripts/db_backup_full.sh
+          register: shell_output
+
+        - name: 配置全备脚本
+          shell: cat /usr/local/dba/scripts/db_backup_full.sh_tmp >> /usr/local/dba/scripts/db_backup_full.sh;rm -rf /usr/local/dba/scripts/db_backup_full.sh_tmp
+          register: shell_output
+
+        - name: 'sed 全备 port'
+          shell: sed -i 's/__port__/{{ port }}/g' /usr/local/dba/scripts/db_backup_full.sh
+          register: shell_output
+
+        - name: 'sed 全备 ip'
+          shell: sed -i 's/__backupip__/{{ inventory_hostname }}/g' /usr/local/dba/scripts/db_backup_full.sh
+          register: shell_output
+
+        - name: 'sed 全备 path'
+          shell: sed -i 's!__mysql_path__!{{ mysql_path }}!g' /usr/local/dba/scripts/db_backup_full.sh
+          register: shell_output
+
+        - name: copy增备file
+          template: src=./db_backup_day.sh dest=/usr/local/dba/scripts/db_backup_day.sh_tmp mode=0644
+          register: shell_output
+
+        - name: 配置增备path
+          shell: echo "export PATH=/usr/local/pigz-2.3.4:/usr/local/{{ pkg_name }}/bin:$PATH" > /usr/local/dba/scripts/db_backup_day.sh
+          register: shell_output
+
+        - name: 配置增备脚本
+          shell: cat /usr/local/dba/scripts/db_backup_day.sh_tmp >> /usr/local/dba/scripts/db_backup_day.sh;rm -rf /usr/local/dba/scripts/db_backup_day.sh_tmp
+          register: shell_output
+
+        - name: 'sed 增备 port'
+          shell: sed -i 's/__port__/{{ port }}/g' /usr/local/dba/scripts/db_backup_day.sh
+          register: shell_output
+
+        - name: 'sed 增备 ip'
+          shell: sed -i 's/__backupip__/{{ inventory_hostname }}/g' /usr/local/dba/scripts/db_backup_day.sh
+          register: shell_output
+
+        - name: 'sed 增备 path'
+          shell: sed -i 's!__mysql_path__!{{ mysql_path }}!g' /usr/local/dba/scripts/db_backup_day.sh
+          register: shell_output
+
+        - name: set 全备 crontal
+          cron:
+            name: full_backup
+            minute: "0"
+            hour: "0"
+            weekday: "1"
+            job: sh /usr/local/dba/db_backup_full.sh &> /usr/local/dba/log/full_$(date +\%F).log
+
+        - name: set 增备 crontal
+          cron:
+            name: incre_backup
+            minute: "0"
+            hour: "0"
+            weekday: "0,2-6"
+            job: sh /usr/local/dba/db_backup_day.sh &> /usr/local/dba/log/day_$(date +\%F).log

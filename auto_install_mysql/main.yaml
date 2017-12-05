@@ -2,3 +2,7 @@
 - include: 1.set_mysql_env.yaml  tags=1
 
 - include: 2.start_mysql.yaml tags=2
+
+- include: 3.set_backup.yaml tags=3
+
+- include: 4.set_monitor.yaml tags=4

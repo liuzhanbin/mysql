@@ -1,18 +1,13 @@
-
-delete from mysql.user where host!='127.0.0.1' or user!='root';
-flush privileges;
-
-grant process,reload,lock tables,super,replication client,replication slave on *.* to 'bkpuser'@'127.0.0.1' identified by password '*2a58dd5a959b1b5d320404c21b42bbc69ac0defe';
-grant select,insert,update,create on percona_schema.* to 'bkpuser'@'127.0.0.1';
-grant process,reload,lock tables,super,replication client,replication slave on *.* to 'bkpuser'@'localhost' identified by password '*2a58dd5a959b1b5d320404c21b42bbc69ac0defe';
-grant select,insert,update,create on percona_schema.* to 'bkpuser'@'localhost';
-
-grant replication client, process on *.* to falcon@'127.0.0.1' identified by password '*fcf759487eb0b555e9a59da3c17db0957b52aca6';
-
-grant process, super on *.* to 'lepus_monitor'@'192.168.40.65' identified by password '*4d4c3f19988186783d5d44e42b448a2ccd5d78e5';
-grant select, insert, update, delete, create, alter, super, replication slave, replication client on *.* to 'putin_rw'@'172.16.33.191' identified by password '*a6359871933ad9553787adadfdcc3bdbc7445233';
-
-grant all on *.* to tianyuan@'127.0.0.1' identified by password '*efc0f6a55d04b7d11330b7e3c3234b14d1b9be3c' with grant option;
-grant all on *.* to tianyuan@'192.168.40.65' identified by password '*efc0f6a55d04b7d11330b7e3c3234b14d1b9be3c' with grant option;
+GRANT RELOAD, PROCESS, SUPER, LOCK TABLES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'bkpuser'@'127.0.0.1' IDENTIFIED BY PASSWORD '*2A58DD5A959B1B5D320404C21B42BBC69AC0DEFE';
+GRANT SELECT, INSERT, UPDATE, CREATE ON `percona_schema`.* TO 'bkpuser'@'127.0.0.1';
+GRANT RELOAD, PROCESS, SUPER, LOCK TABLES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'bkpuser'@'localhost' IDENTIFIED BY PASSWORD '*2A58DD5A959B1B5D320404C21B42BBC69AC0DEFE';
+GRANT SELECT, INSERT, UPDATE, CREATE ON `percona_schema`.* TO 'bkpuser'@'localhost';
+GRANT PROCESS, REPLICATION CLIENT ON *.* TO 'falcon'@'127.0.0.1' IDENTIFIED BY PASSWORD '*FCF759487EB0B555E9A59DA3C17DB0957B52ACA6';
+GRANT PROCESS, SUPER ON *.* TO 'lepus_monitor'@'192.168.40.65' IDENTIFIED BY PASSWORD '*4D4C3F19988186783D5D44E42B448A2CCD5D78E5';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, SUPER, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'putin_rw'@'172.16.33.191' IDENTIFIED BY PASSWORD '*A6359871933AD9553787ADADFDCC3BDBC7445233';
+GRANT REPLICATION SLAVE ON *.* TO 'repl'@'172.16.%' IDENTIFIED BY PASSWORD '*AFAF2DF9E915DC4CADF3D97B30B754ACD59FEF97';
+GRANT REPLICATION SLAVE ON *.* TO 'repl'@'192.168.%' IDENTIFIED BY PASSWORD '*AFAF2DF9E915DC4CADF3D97B30B754ACD59FEF97';
+GRANT ALL PRIVILEGES ON *.* TO 'tianyuan'@'127.0.0.1' IDENTIFIED BY PASSWORD '*EFC0F6A55D04B7D11330B7E3C3234B14D1B9BE3C' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO 'tianyuan'@'192.168.40.65' IDENTIFIED BY PASSWORD '*EFC0F6A55D04B7D11330B7E3C3234B14D1B9BE3C' WITH GRANT OPTION;
 reset master;
-grant all on *.* to root@'127.0.0.1' identified by password '*2eada92e1de4822686100c544d7d5e88ac27fb15' with grant option;
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'127.0.0.1' IDENTIFIED BY PASSWORD '*2EADA92E1DE4822686100C544D7D5E88AC27FB15' WITH GRANT OPTION;
