@@ -1,9 +1,10 @@
 [mysql]
-master ansible_ssh_host=192.168.1.102 serverid=1023306 mysql_port=3306 bufferpool=1GB
+master ansible_ssh_host=192.168.1.102 serverid=1023306 mysql_port=3308 bufferpool=256MB
+slave1 ansible_ssh_host=192.168.1.101 serverid=1013306 mysql_port=3309 bufferpool=256MB
 
 [mysql:vars]
-master_ip=192.168.1.101
-master_port=3306
+master_ip=192.168.1.102
+master_port=3308
 slave_ips=192.168.%
 mysql_path=/opt/mysql
 pkg_name=mysql-5.6.38-linux-glibc2.12-x86_64
@@ -12,7 +13,7 @@ ansible_python_interpreters=/usr/bin/python2.6
 [backup]
 192.168.1.101
 [backup:vars]
-port=3307
+port=3308
 remote_backup_ip=172.16.7.150
 mysql_path=/opt/mysql
 pkg_name=mysql-5.6.38-linux-glibc2.12-x86_64

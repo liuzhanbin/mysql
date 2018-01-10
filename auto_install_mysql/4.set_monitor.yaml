@@ -1,37 +1,46 @@
 ---
 - name: set monitor
   hosts: mysql
-  serial: 1
   tasks:
 
-        - name: 安装基础包
-          yum: pkg={{ item }} state=installed
-          with_items:
-            - libselinux-python
+        - name: 查看monitor agent是否存在
+          shell: ls /usr/local/openfalcon-0.2/agent/config/cfg.json
+          register: result
+          ignore_errors: True
 
         - name: copy file from control machine to remote host
-          unarchive: src=./mysql_install_packages/openfalcon.tar.gz dest=/usr/local copy=yes
+          unarchive: src=./mysql_install_packages/openfalcon-0.2.tar.gz dest=/usr/local copy=yes
+          when: result|failed
           tags:
              - unarchive
 
         - name: sed falcon
-          shell: sed -i "s/__hostip__/{{ ansible_ssh_host }}/g" /usr/local/openfalcon/agent/cfg.json
+          shell: sed -i "s/__hostip__/{{ ansible_ssh_host }}/g" /usr/local/openfalcon-0.2/agent/config/cfg.json
           register: result
 
         - name: sed mymon
-          shell: sed -i "s/__hostip__/{{ ansible_ssh_host }}/g" /usr/local/openfalcon/mymon/etc/mon.cfg
+          shell: sed -i "s/__hostip__/{{ ansible_ssh_host }}/g" /usr/local/openfalcon-0.2/mymon/etc/mon.cfg
           register: result
 
         - name: sed mymon
-          shell: sed -i "s/__port__/{{ mysql_port }}/g" /usr/local/openfalcon/mymon/etc/mon.cfg
+          shell: sed -i "s/__port__/{{ mysql_port }}/g" /usr/local/openfalcon-0.2/mymon/etc/mon.cfg
           register: result
 
         - name: start falcon
-          shell: "/usr/local/openfalcon/agent/falcon-agent -c /usr/local/openfalcon/agent/cfg.json &> /usr/local/openfalcon/agent/falcon.log & "
+          shell: "/usr/local/openfalcon-0.2/agent/bin/falcon-agent -c /usr/local/openfalcon-0.2/agent/config/cfg.json &> /usr/local/openfalcon-0.2/agent/logs/falcon.log & "
           async: 1
           poll: 0
+          tags:
+             - startfalcon
 
-        - name: set crontal
+        - name: set mymon crontab
           cron:
-            name: mymon
+            name: start mymon
             job: /usr/local/openfalcon/mymon/mymon -c /usr/local/openfalcon/mymon/etc/mon.cfg
+
+        - name: set mymonlog crontab
+          cron:
+            name: cut mymon log
+            minute: "0"
+            hour: "0"
+            job: echo " " > /root/mymon.log

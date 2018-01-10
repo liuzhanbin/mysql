@@ -6,3 +6,5 @@
 - include: 3.set_backup.yaml tags=3
 
 - include: 4.set_monitor.yaml tags=4
+
+- include: 5.slow_log.yaml tags=5

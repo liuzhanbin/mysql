@@ -1,3 +1,6 @@
+# 如下请在lepus服务端进行设置
+# 0 9 * * * /usr/local/dba/python_project/sql_slow_py/bin/python  /usr/local/dba/python_project/sql_slow_py/scripts/sql_slow_monitor.py
+#cat /usr/local/dba/python_project/sql_slow_py/scripts/sql_slow_monitor.py
 import re
 import pymysql
 import time
@@ -81,8 +84,8 @@ for i in data1:
     port=i['port']
     tags=i['tags']
     send_slowquery_to_list=i['send_slowquery_to_list'].split(";")
-    #sql2 = "select review.*,history.* from mysql_slow_query_review review join mysql_slow_query_review_history history on review.`checksum`=history.checksum and db_max='tbj' and serverid_max='%s' and db_max!='information_schema' and fingerprint!='commit' and user_max!='root' and ts_min>'%s' and ts_max<'%s' and ts_cnt>500  order by  ts_cnt desc ;"
-    sql2 = "select review.*,history.* from mysql_slow_query_review review join mysql_slow_query_review_history history on review.`checksum`=history.checksum and serverid_max=%s and db_max!='information_schema' and fingerprint!='commit' and user_max!='root' and ts_min>'%s' and ts_max<'%s' and ts_cnt>500  order by  ts_cnt desc ;"
+    #sql2 = "select review.*,history.* from mysql_slow_query_review review join mysql_slow_query_review_history history on review.`checksum`=history.checksum and db_max='tbj' and serverid_max='%s' and db_max!='information_schema' and fingerprint!='commit' and user_max!='root' and ts_min>'%s' and ts_max<'%s' and ts_cnt>1000  order by  ts_cnt desc ;"
+    sql2 = "select review.*,history.* from mysql_slow_query_review review join mysql_slow_query_review_history history on review.`checksum`=history.checksum and serverid_max=%s and db_max!='information_schema' and fingerprint!='commit' and user_max!='root' and ts_min>'%s' and ts_max<'%s' and ts_cnt>1000  order by  ts_cnt desc ;"
 
 #    print(sql2)
     cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
@@ -117,11 +120,11 @@ for i in data1:
         #print(sample_out)
         #print(content)
         strTitle="您的数据库实例:["+tags+"]发现慢查询请及时优化"
-        strContent="HI ALL:\n下面的慢查询语句或许会影响到数据库的稳定性和健康性，请您在收到此邮件后及时优化语句或代码。数据库的稳定性需要大家的共同努力，感谢您的配合！\n(慢查询统计规则：统计前一日，执行大于1s，总次数超过500次的查询SQL。)\n"+"标签：" +tags +"\n" + str(content) + "\n\n--\n\n慢查询自动推送邮件"
+        strContent="HI ALL:\n下面的慢查询语句或许会影响到数据库的稳定性和健康性，请您在收到此邮件后及时优化语句或代码。数据库的稳定性需要大家的共同努力，感谢您的配合！\n(慢查询统计规则：统计前一日，执行大于1s，总次数超过1000次的查询SQL。)\n"+"标签：" +tags +"\n" + str(content) + "\n\n--\n\n慢查询自动推送邮件"
         m=MailSender()
         m.sendEmail(strTitle,strContent,send_slowquery_to_list)
     else:
-        strContent="标签：" +tags +"\n"+"恭喜：昨天没有慢查询产生！！\n(慢查询统计规则：统计前一日，执行大于1s，总次数超过500次的查询SQL。)\n\n\n--\n\n慢查询自动推送邮件"
+        strContent="标签：" +tags +"\n"+"恭喜：昨天没有慢查询产生！！\n(慢查询统计规则：统计前一日，执行大于1s，总次数超过1000次的查询SQL。)\n\n\n--\n\n慢查询自动推送邮件"
         strTitle="您的数据库实例:["+tags+"]未发现慢查询"
         m = MailSender()
         send_slowquery_to_list_other=['tianyuan@tongbanjie.com']

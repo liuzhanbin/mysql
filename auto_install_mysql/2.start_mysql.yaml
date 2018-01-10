@@ -96,7 +96,5 @@
      #debug:q
      #  msg: "{{ master_ip }},{{ master_port }}"
      when: inventory_hostname != "master"
-     debug:
-       msg: "完成对 {{ master_ip }} 的从库搭建。"
      tags:
         - "slave"

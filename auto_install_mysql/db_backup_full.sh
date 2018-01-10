@@ -6,7 +6,7 @@
 
 
 
-monitor_host="192.168.40.65"
+monitor_host="172.16.33.209"
 backup_type="xtrabackup"
 port=__port__
 ip=__backupip__
@@ -19,7 +19,7 @@ week_dir="${backup_dir}/$(date +"%Y%W")"
 my_cnf="__mysql_path__/${port}/conf/my.cnf"
 user='bkpuser'
 password=''
-slave_workers=10
+slave_workers=`mysql -h127.0.0.1 -P$port -u$user -p$password -BNe "show variables like 'slave_parallel_workers';" 2> /dev/null|awk -F " " '{print $2}'`
 to_mail=
 subject="全量备份状态:"
 content="来自${host_name}:${host_ip} 全量备份状态:"
@@ -72,8 +72,8 @@ else
     filesize=''
 fi
 
-
-curl http://192.168.40.65:4000/sender/mail -d "tos=${to_mail}&subject=${subject} ${status}&content=${content} ${status} ${filesize}"
+#需在 ${monitor_host} 上跑4000端口的邮件服务。
+curl http://${monitor_host}:4000/sender/mail -d "tos=${to_mail}&subject=${subject} ${status}&content=${content} ${status} ${filesize}"
 
 mysql -h$monitor_host -udba -ppass dba_monitor --port=3306  <<EOF
 update dbback_list set backup_status='${status}',backup_en_time='${end_time}',filesize='${filesize}' where host_ip='${host_ip}' and curdate='${cur_date}';

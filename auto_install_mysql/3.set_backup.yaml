@@ -3,17 +3,8 @@
   hosts: backup
   serial: 1
   tasks:
-        - name: 安装基础包
-          yum: pkg={{ item }} state=installed
-          with_items:
-            - zlib
-            - zlib-devel
-            - nfs-utils
-            - portmap
-          tags:
-             - backup
 
-        - name: copy percona
+        - name: 查看备份软件是否存在
           shell: ls /usr/local/percona-xtrabackup-2.4.5-Linux-x86_64
           register: result
           ignore_errors: True
@@ -29,15 +20,11 @@
           register: result
           ignore_errors: True
 
-        - name: copy pigz
+        - name: 直接使用已经编译好的 pigz
           unarchive: src=./mysql_install_packages/pigz-2.3.4.tar.gz dest=/usr/local copy=yes
           when: result|failed
           tags:
              - unarchive
-
-        - name: 'pigz'
-          shell: cd /usr/local/pigz-2.3.4 && make
-          register: shell_output
 
         - name: 'mkdir '
           shell: mkdir -p /usr/local/dba/scripts;mkdir -p /usr/local/dba/backup_log
@@ -91,18 +78,18 @@
           shell: sed -i 's!__mysql_path__!{{ mysql_path }}!g' /usr/local/dba/scripts/db_backup_day.sh
           register: shell_output
 
-        - name: set 全备 crontal
+        - name: set 全备 crontab
           cron:
             name: full_backup
             minute: "0"
             hour: "0"
             weekday: "1"
-            job: sh /usr/local/dba/db_backup_full.sh &> /usr/local/dba/log/full_$(date +\%F).log
+            job: /bin/sh /usr/local/dba/scripts/db_backup_full.sh &> /usr/local/dba/backup_log/full_$(date +\%F).log
 
-        - name: set 增备 crontal
+        - name: set 增备 crontab
           cron:
             name: incre_backup
             minute: "0"
             hour: "0"
             weekday: "0,2-6"
-            job: sh /usr/local/dba/db_backup_day.sh &> /usr/local/dba/log/day_$(date +\%F).log
+            job: /bin/sh /usr/local/dba/scripts/db_backup_day.sh &> /usr/local/dba/backup_log/day_$(date +\%F).log

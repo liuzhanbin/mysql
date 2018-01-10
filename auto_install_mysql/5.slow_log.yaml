@@ -1,6 +1,6 @@
 ---
 - name: 部署慢查询监控
-  hosts: other
+  hosts: mysql
   tasks:
         - name: 判断软件是否存在
           shell: ls /tmp/percona-toolkit-3.0.5-1.el6.x86_64.rpm
@@ -11,7 +11,7 @@
           copy: src=./mysql_install_packages/percona-toolkit-3.0.5-1.el6.x86_64.rpm dest=/tmp/
           when: result|failed
 
-        - name: 判断软件是否按照
+        - name: 判断软件是否安装
           shell: ls /usr/bin/pt-query-digest
           ignore_errors: True
           register: result
@@ -20,9 +20,9 @@
           shell: yum -y localinstall /tmp/percona-toolkit-3.0.5-1.el6.x86_64.rpm
           when: result|failed
 
-        - name: 判断目录slowquery_dir
+        - name: 判断slowquery_dir目录
           file:
-            path: /opt/mysql_slowlog/{{ port }}/
+            path: /opt/mysql_slowlog/{{ mysql_port }}/
             state: directory
             owner: mysql
             group: mysql
@@ -48,7 +48,7 @@
           register: shell_output
 
         - name: 'sed mysql port'
-          shell: sed -i 's#__port__#{{ port }}#g' /usr/local/sbin/lepus_slowquery.sh
+          shell: sed -i 's#__port__#{{ mysql_port }}#g' /usr/local/sbin/lepus_slowquery.sh
           register: shell_output
 
         - name: sed mymon
@@ -58,5 +58,6 @@
         - name: set crontal
           cron:
             name: lepus_slowquery
-            minute: "*/5"
+            minute: "0"
+            hour: "0"
             job: sh /usr/local/sbin/lepus_slowquery.sh > /dev/null 2>&1

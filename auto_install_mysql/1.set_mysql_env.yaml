@@ -36,6 +36,10 @@
             - libselinux-python
             - numactl
             - libaio
+            - zlib
+            - zlib-devel
+            - nfs-utils
+            - portmap
           tags:
              - base_pkg
 
@@ -55,7 +59,7 @@
           ignore_errors: True     #执行错误则忽略改错误,继续执行下列模块
 
 #unarchive这个模块的效率太低了,独立执行为1m20s,比copy和tar(一起为50s)慢了30s。
-        - name: copy file from control machine to remote host
+        - name: copy mysql package from control machine to remote host
           unarchive: src=./mysql_install_packages/{{ pkg_name }}.tar.gz dest=/usr/local copy=yes
           when: result|failed
           tags:
