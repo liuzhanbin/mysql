@@ -1,0 +1,33 @@
+---
+- name: set monitor
+  hosts: other
+  tasks:
+
+        - name: 安装基础包
+          yum: pkg={{ item }} state=installed
+          with_items:
+            - libselinux-python
+
+        - name: copy file from control machine to remote host
+          unarchive: src=./mysql_install_packages/openfalcon-0.2.tar.gz dest=/usr/local copy=yes
+          tags:
+             - unarchive
+
+        - name: sed falcon
+          shell: sed -i "s/__hostip__/{{ ansible_ssh_host }}/g" /usr/local/openfalcon-0.2/agent/config/cfg.json
+          register: result
+
+        - name: sed mymon
+          shell: sed -i "s/__hostip__/{{ ansible_ssh_host }}/g" /usr/local/openfalcon-0.2/mymon/etc/mon.cfg
+          register: result
+
+        - name: sed mymon
+          shell: sed -i "s/__port__/{{ mysql_port }}/g" /usr/local/openfalcon-0.2/mymon/etc/mon.cfg
+          register: result
+
+        - name: start falcon
+          shell: "/usr/local/openfalcon-0.2/agent/bin/falcon-agent -c /usr/local/openfalcon-0.2/agent/config/cfg.json &> /usr/local/openfalcon-0.2/agent/logs/falcon.log & "
+          async: 1
+          poll: 0
+          tags:
+             - startfalcon

@@ -1,7 +1,7 @@
 ---
 - name: set monitor
   hosts: mysql
-#  max_fail_percentage: 2
+  serial: 1
   tasks:
 
         - name: 安装基础包

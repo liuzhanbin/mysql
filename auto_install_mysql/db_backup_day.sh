@@ -4,8 +4,6 @@
 #0 0 * * 0,2-6 sh /usr/local/dba/db_backup_day_00.sh &>> /usr/local/dba/log/incre_bak_3306.log
 #===============================
 
-PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/mysql56/bin:/root/bin:/usr/local/pigz-2.3.4/"
-export PATH
 
 monitor_host="192.168.40.65"
 backup_type="xtrabackup"
@@ -62,7 +60,7 @@ if [[ $status -eq 0 ]]; then
     tar cvf - ${inc_backup_dir} | pigz > ${inc_backup_dir}.tar.gz
     rm -rf ${inc_backup_dir} > /dev/null
     sleep 1
-    filesize=$(du -sh ${inc_backup_dir}.tar.gz |awk '{print $1}')
+    filesize=$(ls -lh ${filename}.tar.gz|awk -F " " '{print $5}')
 else
     status='fail'
     filesize=''

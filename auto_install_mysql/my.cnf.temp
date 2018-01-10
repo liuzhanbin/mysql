@@ -54,7 +54,7 @@ skip_slave_start
 slave_net_timeout              = 60
 relay-log-info-repository      = TABLE
 slave_compressed_protocol      = ON
-slave_parallel_workers         = 10
+#slave_parallel_workers         = 10
 
 # CACHES AND LIMITS #
 max_connections                = 1000

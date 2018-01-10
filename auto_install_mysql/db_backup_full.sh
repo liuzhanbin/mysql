@@ -66,7 +66,7 @@ mysql -h127.0.0.1 -P$port -u$user -p$password -e "set global slave_parallel_work
 if [[ $status -eq 0 ]]; then
     status='ok'
     sleep 1
-    filesize=$(du -sh ${filename} |awk '{print $1}')
+    filesize=$(ls -lh ${filename} |awk -F " " '{print $5}')
 else
     status='fail'
     filesize=''

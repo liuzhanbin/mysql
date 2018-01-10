@@ -49,6 +49,10 @@
      tags:
         - "install db"
 
+   - name: '判断初始化是否成功'
+     shell: ls {{ mysql_path }}/{{ mysql_port }}/data/mysql/user.frm
+     register: result
+
    - name: '启动数据库'
      shell: /usr/local/{{ pkg_name }}/bin/mysqld_safe --defaults-file={{ mysql_path }}/{{ mysql_port }}/conf/my.cnf --user=mysql &
      #when: result|success
@@ -68,7 +72,7 @@
 
    - name: 'success'
      debug:
-       msg: "success {{ mysql_port }}  启动成功,请执行命令(  )搭建搭建主从。"
+       msg: "success {{ mysql_port }}  启动成功。"
      when: result|success
      tags:
         - "debug"
@@ -92,5 +96,7 @@
      #debug:q
      #  msg: "{{ master_ip }},{{ master_port }}"
      when: inventory_hostname != "master"
+     debug:
+       msg: "完成对 {{ master_ip }} 的从库搭建。"
      tags:
         - "slave"

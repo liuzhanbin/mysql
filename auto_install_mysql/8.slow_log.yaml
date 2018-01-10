@@ -1,0 +1,62 @@
+---
+- name: 部署慢查询监控
+  hosts: other
+  tasks:
+        - name: 判断软件是否存在
+          shell: ls /tmp/percona-toolkit-3.0.5-1.el6.x86_64.rpm
+          ignore_errors: True
+          register: result
+
+        - name: 传输软件
+          copy: src=./mysql_install_packages/percona-toolkit-3.0.5-1.el6.x86_64.rpm dest=/tmp/
+          when: result|failed
+
+        - name: 判断软件是否按照
+          shell: ls /usr/bin/pt-query-digest
+          ignore_errors: True
+          register: result
+
+        - name: 安装软件
+          shell: yum -y localinstall /tmp/percona-toolkit-3.0.5-1.el6.x86_64.rpm
+          when: result|failed
+
+        - name: 判断目录slowquery_dir
+          file:
+            path: /opt/mysql_slowlog/{{ port }}/
+            state: directory
+            owner: mysql
+            group: mysql
+          tags:
+            - path
+
+        - name: 查看是否有已经安装mysql包
+          shell: ls /usr/local/{{ pkg_name }}/bin/mysql
+          register: result 
+          ignore_errors: True 
+
+        - name: unar
+          unarchive: src=./mysql_install_packages/{{ pkg_name }}.tar.gz dest=/usr/local copy=yes
+          when: result|failed
+          tags:
+             - unar
+
+        - name: copy shell
+          template: src=./lepus_slowquery.sh dest=/usr/local/sbin/  mode=0755
+
+        - name: 'sed mysql '
+          shell: sed -i 's#__mysql__#/usr/local/{{ pkg_name }}/bin/mysql#g' /usr/local/sbin/lepus_slowquery.sh
+          register: shell_output
+
+        - name: 'sed mysql port'
+          shell: sed -i 's#__port__#{{ port }}#g' /usr/local/sbin/lepus_slowquery.sh
+          register: shell_output
+
+        - name: sed mymon
+          shell: sed -i "s/__hostip__/{{ ansible_ssh_host }}/g" /usr/local/sbin/lepus_slowquery.sh
+          register: result
+
+        - name: set crontal
+          cron:
+            name: lepus_slowquery
+            minute: "*/5"
+            job: sh /usr/local/sbin/lepus_slowquery.sh > /dev/null 2>&1

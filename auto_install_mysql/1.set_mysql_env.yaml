@@ -1,7 +1,7 @@
 ---
 - name: binary package install MySQL
   hosts: mysql
-#  max_fail_percentage: 2
+#  serial: 1
   tasks:
         - name: 查看是否有ignorespace设置
           shell: grep "HISTCONTROL=ignorespace" /root/.bashrc
@@ -35,6 +35,7 @@
             - autoconf
             - libselinux-python
             - numactl
+            - libaio
           tags:
              - base_pkg
 
@@ -46,29 +47,33 @@
           tags:
              - create_mysql
 
-#unarchive这个模块的效率太低了,独立执行为1m20s,比copy和tar(一起为50s)慢了20s。
-#        - name: copy file from control machine to remote host
-#          unarchive: src=./mysql_install_packages/{{ pkg_name }}.tar.gz dest=/usr/local copy=yes
-#          tags:
-#             - unarchive
+
 
         - name: 查看是否有已经安装mysql包
-          shell: ls /usr/local/{{ pkg_name }}
+          shell: ls /usr/local/{{ pkg_name }}/bin/mysql
           register: result        #通过结果进行判断
           ignore_errors: True     #执行错误则忽略改错误,继续执行下列模块
 
-
-        - name: copy
-          copy: src=./mysql_install_packages/{{ pkg_name }}.tar.gz dest=/tmp/
+#unarchive这个模块的效率太低了,独立执行为1m20s,比copy和tar(一起为50s)慢了30s。
+        - name: copy file from control machine to remote host
+          unarchive: src=./mysql_install_packages/{{ pkg_name }}.tar.gz dest=/usr/local copy=yes
           when: result|failed
           tags:
-             - copy
+             - unarchive
 
-
-        - name: tar
-          shell: tar -xvf /tmp/{{ pkg_name }}.tar.gz -C /usr/local/
-          tags:
-             - tar
+#        - name: copy
+#          copy: src=./mysql_install_packages/{{ pkg_name }}.tar.gz dest=/tmp/
+#          when: result|failed
+#          register: result
+#          tags:
+#             - copy
+#
+#
+#        - name: tar
+#          shell: tar -xvf /tmp/{{ pkg_name }}.tar.gz -C /usr/local/
+#          when: result|success
+#          tags:
+#             - tar
 
 #        - name: unar
 #          unarchive: src=/tmp/{{ pkg_name }}.tar.gz dest=/usr/local copy=no
