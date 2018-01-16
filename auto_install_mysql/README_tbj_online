@@ -1,0 +1,31 @@
+ansible安装
+
+yum -y install epel-release
+yum -y install ansible
+brew install ansible
+
+1.对于未进行ssh无密登陆的先进性ssh无密登陆设置。
+在目录ssh_autopass下，编辑ip_pass.txt，加入ip和相应的密码，执行 ssh-AutoSisInstaller.sh即可。
+
+2.对于已经ssh无密登陆的机器。
+a.修改hosts文件中的如下选项值:
+mysql模块的
+ansible_ssh_host、serverid、mysql_port、bufferpool
+master_ip、master_port、slave_ips（主库对从库的授权IP、IP段）、mysql_path、pkg_name
+backup模块的
+IP、port、remote_backup_ip、mysql_path、pkg_name
+b.修改脚本db_backup_full.sh和db_backup_day.sh中的如下选项:
+password、to_mail(不用引号)
+
+3.批量上线MySQL,配置备份和监控
+ansible-playbook main.yaml
+
+4.监控
+lepus: 平台操作添加监控
+openfalcon: 页面进行配置
+
+5.添加putin服务：
+用户配置
+流程管理
+步骤管理（数字越大，顺序越后）
+主库地址
