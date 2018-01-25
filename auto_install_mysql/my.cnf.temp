@@ -39,7 +39,7 @@ max_binlog_size                = 512M
 max_binlog_cache_size          = 4G
 log_bin                        = mysql_path/mysql_port/binlog/mysql-bin
 log_bin_index                  = mysql_path/mysql_port/binlog/mysql-bin.index
-sync_binlog                    = 0
+sync_binlog                    = 1
 innodb_support_xa              = 1
 master-info-repository         = TABLE
 
@@ -84,7 +84,7 @@ innodb_file_format             = Barracuda
 innodb_file_format_max         = Barracuda
 innodb_file_per_table          = 1
 innodb_force_recovery          = 0
-innodb_flush_log_at_trx_commit = 2
+innodb_flush_log_at_trx_commit = 1
 innodb_flush_method            = O_DIRECT
 innodb_lock_wait_timeout       = 50
 innodb_log_buffer_size         = 8M
