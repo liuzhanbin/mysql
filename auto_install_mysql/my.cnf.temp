@@ -52,7 +52,7 @@ server_id                      = serverid
 slave_skip_errors              = OFF
 skip_slave_start
 slave_net_timeout              = 60
-relay-log-info-repository      = TABLE
+relay-log-info-repository      = FILE
 slave_compressed_protocol      = ON
 #slave_parallel_workers         = 10
 

@@ -27,9 +27,9 @@ def replaceAll(old, new, str):
 class MailSender(object):
     def __init__(self):
         try:
-            self.MAIL_REVIEW_SMTP_SERVER = 'mail.maillists.tongbanjie.org'
+            self.MAIL_REVIEW_SMTP_SERVER = 'mail.maillists.xxxxx.org'
             self.MAIL_REVIEW_SMTP_PORT = 25
-            self.MAIL_REVIEW_FROM_ADDR = 'DB_monitor@mail.maillists.tongbanjie.org'
+            self.MAIL_REVIEW_FROM_ADDR = 'DB_monitor@mail.maillists.xxxxx.org'
             self.MAIL_REVIEW_FROM_PASSWORD = 'tbj2018!X'
 
             self.MAIL_REVIEW_DBA_ADDR =''
@@ -127,7 +127,7 @@ for i in data1:
         strContent="标签：" +tags +"\n"+"恭喜：昨天没有慢查询产生！！\n(慢查询统计规则：统计前一日，执行大于1s，总次数超过1000次的查询SQL。)\n\n\n--\n\n慢查询自动推送邮件"
         strTitle="您的数据库实例:["+tags+"]未发现慢查询"
         m = MailSender()
-        send_slowquery_to_list_other=['tianyuan@tongbanjie.com']
+        send_slowquery_to_list_other=['tianyuan@xxxxx.com']
         m.sendEmail(strTitle, strContent, send_slowquery_to_list_other)
 
 conn.close()
